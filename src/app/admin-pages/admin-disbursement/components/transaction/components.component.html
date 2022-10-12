@@ -1,4 +1,8 @@
+<h1 class="px-5 py-4 m-0 fw-bold">{{ pageTitle }}</h1>
 <div class="transaction-list-container mx-3">
+  <div class="container px-5">
+    <div class="card">
+      <div class="card-header bg-white p-4">
     <h2>Loan Transaction List</h2>
   
     <!-- <ng-container *ngIf="transactions && paginate"> -->
@@ -27,10 +31,18 @@
           <td>{{data.disbursementDate | date: 'yyyy-MM-dd'}}</td>
           <td>{{data.nominal}}</td>
           <td class="actions">
-            <a (click)="onApproved(data)">
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-primary text-white me-2" (click)="onApproved(data)">
+                  Disburse
+                </button>
+                <button type="button" class="btn btn-secondary text-white me-2" [routerLink]="['/detail', data.id]">
+                  Detail
+                </button>
+          </div>
+            <!-- <a (click)="onApproved(data)">
                   Action
             </a>
-          <span class="detail" [routerLink]="['/detail', data.id]">Details</span>
+          <span class="detail" [routerLink]="['/detail', data.id]">Details</span> -->
         </td>
         </tr>
         </tbody>
@@ -49,5 +61,8 @@
       </pagination-controls> -->
     <!-- </ng-container> -->
   </div>
+    </div>
+  </div>
+</div>
   
 

@@ -1,0 +1,59 @@
+<h1 class="px-5 py-4 m-0 fw-bold">{{ pageTitle }}</h1>
+<div class="transaction-list-container mx-3">
+  <div class="container px-5">
+    <div class="card">
+      <div class="card-header bg-white p-4">
+    <h2>Loan Transaction List</h2>
+  
+    <!-- <ng-container *ngIf="transactions && paginate"> -->
+      <div class="table-responsive-md mx-3 bdr" >
+      <table class="table table-bordered" style="border-color: #f79323;">
+        <thead>
+        <tr>
+          <th>No</th>
+          <th>Bank</th>
+          <th>Account Name</th>
+          <th>Account Number</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of accountList ; let i = index">
+          <!-- <td>{{(currentPaginate['page'] - 1) * paginate.size + (i + 1)}}</td> -->
+          <td>{{i+1}}</td>
+          <td>{{data.customerBank}}</td>
+          <td>{{data.customerAccountName}}</td>
+          <td>{{data.customerAccountNumber}}</td>
+          <td class="actions">
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary text-white me-2" >
+                    Update
+                  </button>
+                  <button type="button" class="btn btn-secondary text-white me-2">
+                    Delete
+                  </button>
+            </div>
+        </td>
+        </tr>
+        </tbody>
+        <tfoot>
+          <tr style="background-color: #f1b16d; height: 33px;">
+            <td colspan="12"></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  
+      <!-- <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="onTableDataChange($event)">
+      </pagination-controls> -->
+    <!-- </ng-container> -->
+  </div>
+    </div>
+  </div>
+</div>
+  
+
+

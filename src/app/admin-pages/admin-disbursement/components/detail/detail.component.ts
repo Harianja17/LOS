@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Disbursement } from '../../model/disbursement.model';
+import { Disbursement } from 'src/app/shared/model/disbursement.model';
+
 
 @Component({
   selector: 'app-detail',
@@ -14,7 +15,7 @@ export class DetailComponent implements OnInit {
   ngOnInit(): void {
   }
   disbursementData:Disbursement[]=[];
-  pageTitle:string='Ini Judul Eaa..'
+  pageTitle:string='Disbursement'
 
   disbursementForm:FormGroup= new FormGroup({
     customerBank: new FormControl(),

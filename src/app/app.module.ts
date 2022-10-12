@@ -18,7 +18,7 @@ import { CostumerPagesModule } from './costumer-pages/costumer-pages.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

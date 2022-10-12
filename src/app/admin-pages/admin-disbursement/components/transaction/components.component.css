@@ -2,12 +2,16 @@ th, tfoot {
     background-color: #f1b16d;
     color: white;
 }
-.bdr {
+.table {
+  text-align: center;
+} 
+
+/* .bdr {
     border-radius: 18px;
     overflow: hidden;
     
     
-}
+} */
 /* Removes border radius on first td of last tr in tbody */
 .table.table-bordered tbody tr:last-child td:first-child{
   border-radius:0px 0px 0px 0px;

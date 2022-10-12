@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from "sweetalert2";
 import { PageResponse } from 'src/app/shared/model/PageResponse';
-import { TransactionResponse } from '../../model/transaction.model';
+import { TransactionResponse } from 'src/app/shared/model/transaction.model';
+
 
 @Component({
   selector: 'app-components',
@@ -9,6 +10,7 @@ import { TransactionResponse } from '../../model/transaction.model';
   styleUrls: ['./components.component.css']
 })
 export class ComponentsComponent implements OnInit {
+  pageTitle:string='Disbursement'
 
   transactions: TransactionResponse[]=[{id:'123',customer:{firstName:'Mark',lastName:'Lee',id:'',dateOfBirth: new Date('2022-01-01'),phone:'',status:'',userId:''},nominal:250000,tenor:6,approvalStatus:'On Progress',transactionDate:new Date('2022-10-01')}];
   currentPaginate: { [key: string]: any } = {page: 1, size: 5};

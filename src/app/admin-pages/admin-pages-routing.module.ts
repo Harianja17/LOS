@@ -5,6 +5,7 @@ import { AuthGuard } from '../shared/guard/auth.guard';
 import { AdminApprovalComponent } from './admin-approval/admin-approval.component';
 import { AdminCreditSubmissionComponent } from './admin-credit-submission/admin-credit-submission.component';
 import { AdminDisbursementComponent } from './admin-disbursement/admin-disbursement.component';
+import { AccountListComponent } from './admin-disbursement/components/account-list/account-list.component';
 
 import { DetailComponent } from './admin-disbursement/components/detail/detail.component';
 import { ComponentsComponent } from './admin-disbursement/components/transaction/components.component';
@@ -43,6 +44,10 @@ const routes: Routes = [
           {
             path:'detail',
             component:DetailComponent
+          },
+          {
+            path:'account-list',
+            component:AccountListComponent
           }
         ]
       },

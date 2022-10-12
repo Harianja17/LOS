@@ -1,0 +1,7 @@
+.table {
+    text-align: center;
+ } 
+ th, tfoot {
+    background-color: #f1b16d;
+    color: white;
+}

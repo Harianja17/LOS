@@ -13,6 +13,7 @@ import { AdminSurveyComponent } from './admin-survey/admin-survey.component';
 import { DetailComponent } from './admin-disbursement/components/detail/detail.component';
 import { ComponentsComponent } from './admin-disbursement/components/transaction/components.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AccountListComponent } from './admin-disbursement/components/account-list/account-list.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AdminProspectComponent,
     AdminSurveyComponent,
     DetailComponent,
-    ComponentsComponent
+    ComponentsComponent,
+    AccountListComponent
   ],
   imports: [
     CommonModule,
