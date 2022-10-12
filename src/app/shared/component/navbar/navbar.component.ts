@@ -58,10 +58,10 @@ export class NavbarComponent implements OnInit {
 
   disbursementRoute(){
     if(this.roleAdminCheck) this.route.navigateByUrl('/disbursement/transaction')
-    else this.route.navigateByUrl('/disbursement')
+    else this.route.navigateByUrl('/disbursement/list')
   }
   disbursementDetailRoute(){
-    if(this.roleAdminCheck) this.route.navigateByUrl('/disbursement/detail')
-    else this.route.navigateByUrl('/disbursement')
+    if(this.roleAdminCheck) this.route.navigateByUrl('/disbursement/disbursement-form')
+    else this.route.navigateByUrl('/disbursement/form')
   }
 }

@@ -42,7 +42,7 @@ const routes: Routes = [
             component: ComponentsComponent
           },
           {
-            path:'detail',
+            path:'disbursement-form',
             component:DetailComponent
           },
           {

@@ -11,7 +11,9 @@ import { CostumerCreditSubmissionComponent } from './costumer-credit-submission/
 import { CostumerSurveyComponent } from './costumer-survey/costumer-survey.component';
 import { CostumerDisbursementComponent } from './costumer-disbursement/costumer-disbursement.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DisbursementFormComponent } from './components/disbursement-form/disbursement-form.component';
+import { DisbursementFormComponent } from './costumer-disbursement/components/disbursement-form/disbursement-form.component';
+import { TransactionListComponent } from './costumer-disbursement/components/transaction-list/transaction-list.component';
+
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { DisbursementFormComponent } from './components/disbursement-form/disbur
     CostumerCreditSubmissionComponent,
     CostumerSurveyComponent,
     CostumerDisbursementComponent,
-    DisbursementFormComponent
+    DisbursementFormComponent,
+    TransactionListComponent
   ],
   imports: [
     CommonModule,

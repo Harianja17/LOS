@@ -14,6 +14,7 @@ import { DetailComponent } from './admin-disbursement/components/detail/detail.c
 import { ComponentsComponent } from './admin-disbursement/components/transaction/components.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountListComponent } from './admin-disbursement/components/account-list/account-list.component';
+import { TransactionDetailComponent } from './admin-disbursement/components/transaction-detail/transaction-detail.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AccountListComponent } from './admin-disbursement/components/account-li
     AdminSurveyComponent,
     DetailComponent,
     ComponentsComponent,
-    AccountListComponent
+    AccountListComponent,
+    TransactionDetailComponent
   ],
   imports: [
     CommonModule,
