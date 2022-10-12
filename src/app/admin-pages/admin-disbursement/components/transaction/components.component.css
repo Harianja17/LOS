@@ -1,0 +1,38 @@
+th, tfoot {
+    background-color: #f1b16d;
+    color: white;
+}
+.bdr {
+    border-radius: 18px;
+    overflow: hidden;
+    
+    
+}
+/* Removes border radius on first td of last tr in tbody */
+.table.table-bordered tbody tr:last-child td:first-child{
+  border-radius:0px 0px 0px 0px;
+}
+
+/* Removes border radius on last td of last tr in tbody */
+.table.table-bordered tbody tr:last-child td:last-child{
+  border-radius:0px 0px 0px 0px;
+}
+
+.table.table-bordered tfoot tr:last-child td:first-child{
+  border-radius:0px 0px 0px 6px;
+}
+
+/* Adds border radius on last td of last tr in tfoot */
+.table.table-bordered tfoot tr:last-child td:last-child{
+  border-radius:0px 0px 6px 0px;
+}
+
+/* Removes bottom border to td's in last tr in tbody */
+.table.table-bordered tbody tr:last-child td{
+  border-bottom:none;
+}
+
+/* Adds bottom border to td's in last tr in tfoot */
+.table.table-bordered tfoot tr:last-child td{
+  border-bottom:1px solid #ddd;
+}

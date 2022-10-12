@@ -1,0 +1,29 @@
+$theme-colors: (
+  "primary": #f7931d,
+  "secondary": #f15a22,
+);
+
+$border-radius: 6px;
+$border-radius-sm: 6px;
+$border-radius-lg: 6px;
+$border-radius-pill: 6px;
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+:root {
+  // --bs-body-font-family: Calibri, "Calibri Alt", Helvetica, sans-serif;
+  --bs-body-font-family: Poppins;
+  --bs-body-font-size: 10pt;
+}
+
+.btn {
+  --bs-btn-border-radius: 5px;
+  --bs-btn-font-size: 10pt;
+}
+
+.card {
+  --bs-card-spacer-x: 1.5rem;
+  --bs-card-spacer-y: 1.5rem;
+}

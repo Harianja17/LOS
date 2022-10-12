@@ -1,0 +1,63 @@
+<div class="login vh-100 d-flex justify-content-center align-items-center">
+  <div class="card shadow-lg">
+    <div class="card-body">
+      <div class="row">
+        <div class="col me-2 d-flex align-items-center">
+          <div class="">
+            <h4 class="card-title text-center text-primary fw-bold mb-4">
+              Loan Originating System
+            </h4>
+            <!-- <div class="text-center w-100 mb-4">
+            <img
+              src="https://www.danamon.co.id/-/media/ICON-DCWCOID/LOGO-HEADER/MUFG-endorsment-Line-01.png?h=65&la=id&mh=65&w=260&hash=EF3844C2BC26B0159F9311207D5466122464C4A5"
+            />
+          </div> -->
+          <form [formGroup]="loginForm">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="identifier"> 👤 </span>
+              <input type="text" class="form-control" placeholder="NIK" aria-describedby="identifier" id="identifier" formControlName="identifier">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="password"> 🔑 </span>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Kata Sandi"
+                aria-describedby="password" id="password" formControlName="password"
+              />
+            </div>
+          </form>
+
+            <div class="d-grid gap-2">
+              <button
+              (click)="login()"
+              class="btn btn-primary text-white"
+              >
+                Login
+              </button>
+            </div>
+            <div class="mt-2 mb-3 text-end">
+              <a routerLink="/" class="link-primary fw-bold ">Forgot Password?</a>
+            </div>
+            <hr>
+            <div class="d-grid gap-2 mt-2 text-center">
+              <p>Dont have any account? <a style="text-decoration: none;" class="link-primary text-primary" (click)="register()">Register</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div
+            class="w-100 h-100 d-flex align-items-center justify-content-center"
+          >
+            <img
+              class="px-1 py-2"
+              src="/assets/illustrator/landing-page-illustrator.svg"
+            />
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

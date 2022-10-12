@@ -1,0 +1,180 @@
+<div class="container m-4">
+    <h1>Approval List</h1>
+</div>
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+    (click)="setCurrentDetailID('1')">
+    COMPLETE ID 1
+</button>
+
+<br>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+    (click)="setCurrentDetailID('2')">
+    COMPLETE ID 2
+</button>
+
+
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content mt-4">
+
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Complete Your Credit Submission
+                    <br>
+                    <h6>Current edited : {{currentDetailID}}</h6>
+                </h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="setCurrentDetailID('')"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="container-fluid">
+
+                    <div>
+                        <h5 class="fw-bold">Collateral Data</h5>
+                        <form [formGroup]="collateralDataForm">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="guaranteeObjectName" class="col-form-label">Guarantee Object:</label>
+                                    <input type="text" class="form-control" id="guaranteeObjectName"
+                                        formControlName="guaranteeObjectName">
+                                </div>
+                                <div class="col-6">
+                                    <label for="guaranteeObjectValue" class="col-form-label">Value:</label>
+                                    <input type="text" class="form-control" id="guaranteeObjectValue"
+                                        formControlName="guaranteeObjectValue">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="mt-5">
+                        <h5 class="fw-bold">Income</h5>
+                        <form [formGroup]="incomeForm">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="salary" class="col-form-label">Salary</label>
+                                    <input type="text" class="form-control" id="salary" formControlName="salary">
+                                </div>
+                                <div class="col-6">
+                                    <label for="businessIncome" class="col-form-label">Bussiness Income</label>
+                                    <input type="text" class="form-control" id="businessIncome"
+                                        formControlName="businessIncome">
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-6">
+                                    <label for="otherIncome" class="col-form-label">Other Income</label>
+                                    <input type="text" class="form-control" id="otherIncome"
+                                        formControlName="otherIncome">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="mt-5">
+                        <div class="row"></div>
+                        <h5 class="fw-bold">Outcome <span class="ms-3"><button type="button" class="btn btn-primary"
+                                    (click)="addInputControl()">+</button></span></h5>
+
+                        <div class="input-row"
+                            *ngFor="let hobby of outcomeArray.controls; index as idx; last as isLast">
+                            <form [formGroup]="hobby" class="row">
+                                <div class="col-6">
+                                    <label for="outcomeName" class="col-form-label">Outcome {{idx+1}} Name</label>
+                                    <input type="text" class="form-control" id="outcomeName"
+                                        formControlName="outcomeName">
+                                </div>
+                                <div class="col-5">
+                                    <label for="outcomeAmount" class="col-form-label">Outcome {{idx+1}} Amount</label>
+                                    <input type="text" class="form-control" id="outcomeAmount"
+                                        formControlName="outcomeAmount">
+                                </div>
+                                <div class="col-1">
+                                    <button type="button" class="btn btn-secondary" *ngIf="outcomeArray.length > 1"
+                                        (click)="removeInputControl(idx)">X</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- <div>{{outcomeArray.valueChanges | async | json}}</div> -->
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="resetAllForm()">Reset</button>
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+                    data-bs-dismiss="modal">Save</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-bs-backdrop="static" id="exampleModalToggle2" aria-hidden="true"
+    aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel2">Are you sure to save ?</h5>
+            </div>
+            <div class="modal-body">
+                Saved changes will be irreversible.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-target="#exampleModal" data-bs-toggle="modal"
+                    data-bs-dismiss="modal">Back</button>
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal"
+                    data-bs-dismiss="modal" (click)="submitForm()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-bs-backdrop="static" id="exampleModalToggle3" aria-hidden="true"
+    aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel2">Your data has been saved !</h5>
+                <button type="button" (click)="setCurrentDetailID('')" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Your loan request is under review. We will tell you about the updates in a mean time.
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- <div class="container">
+    <h2>Please add as many hobbies as you want below.</h2>
+    <div class="input-row" *ngFor="let hobby of hobbiesArray.controls; index as idx; last as isLast">
+            <form [formGroup]="hobby">
+                <input type="text" id="productName" formControlName="productName">
+                <input type="text" id="productPice" formControlName="productPrice">
+            </form>
+            
+        <button mat-icon-button color="warn" *ngIf="hobbiesArray.length > 1" (click)="removeInputControl(idx)">
+      remove
+        </button>
+        <button mat-icon-button color="primary" *ngIf="isLast" (click)="addInputControl()">
+add
+        </button>
+    </div>
+    
+    <h2 class="margin-top">Form Value</h2>
+    <div>{{hobbiesArray.valueChanges | async | json}}</div>
+
+    <button type="button" class="btn btn-primary" (click)="testClick()">safa</button> -->

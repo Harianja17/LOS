@@ -1,0 +1,92 @@
+<nav class="navbar border-bottom-primary bg-light p-0">
+  <div class="container-fluid px-5 w-100 d-flex justify-content-between">
+    <a class="navbar-brand">
+      <a
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasWithBothOptions"
+        aria-controls="offcanvasWithBothOptions"
+      >
+        <img
+          width="150px"
+          src="https://files.klob.id/public/mco01/kuibbwwu/Danamon_by_mufg.png"
+        />
+      </a>
+    </a>
+    <button
+      type="button"
+      class="btn btn-white text-primary"
+      routerLink="/login"
+    >
+      Hi <span [innerText]="identifierForView"></span>
+    </button>
+   
+  </div>
+</nav>
+
+<div class="sidebar border-right-primary">
+  <div class="mb-5">
+    <div class="text-center px-5 py-3">
+      <img
+        class="h-100 w-100 rounded-circle mb-3"
+        src="https://st4.depositphotos.com/11634452/21365/v/600/depositphotos_213659488-stock-illustration-picture-profile-icon-human-or.jpg"
+        alt=""
+      />
+      <div class="text-primary">{{identifierForView}}</div>
+      <h5 class="fw-bold" *ngIf="roleForView!=='CUSTOMER'">{{roleForView}}</h5>
+    </div>
+    <a class="btn text-start px-3 mx-4 my-2" (click)="dashboardRoute()"
+      ><img class="me-2" src="/assets/iconify/Group.svg" />Dashboard</a
+    >
+    <a class="btn text-start px-3 mx-4 my-2" (click)="prospectRoute()"
+      ><img class="me-2" src="/assets/iconify/account_circle.svg" />Prospect</a
+    >
+    <a class="btn text-start px-3 mx-4 my-2" (click)="creditSubmissionRoute()"
+      ><img class="me-2" src="/assets/iconify/order.svg" />Credit Submission</a
+    >
+    <a class="btn text-start px-3 mx-4 my-2" (click)="surveyRoute()"
+      ><img
+        class="me-2"
+        src="/assets/iconify/flat-color-icons_survey.svg"
+      />Survey</a
+    >
+    <a class="btn text-start px-3 mx-4 my-2" (click)="approvalRoute()"
+      ><img class="me-2" src="/assets/iconify/manager-list.svg" />Approval</a
+    >  >
+    <a
+            class="btn text-start px-3 mx-4 my-2"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseDisbursement"
+          >
+            <i class="fa fa-hand-holding-dollar fa-lg me-2"></i>
+            Disbursement
+            <i class="ms-2 fa-solid fa-chevron-down"></i>
+          </a>
+          <div class="collapse" id="collapseDisbursement">
+            <div class="ms-3">
+              <a
+                class="btn text-start px-3 mx-4 my-2 collapse "
+                (click)="disbursementRoute()"
+                routerLinkActive="btn-primary text-white"
+              >
+                <i class="fa fa-database fa-lg me-2"></i>
+                Transaction
+              </a>
+              <a
+              class="btn text-start px-3 mx-4 my-2 collapse"
+              (click)="disbursementDetailRoute()"
+              routerLinkActive="btn-primary text-white"
+            >
+              <i class="fa fa-database fa-lg me-2"></i>
+              Disbursement Form
+            </a>
+            </div>
+          </div>
+  </div>
+  <a class="btn btn-primary text-white px-3 mx-4 my-2" (click)="logOut()">Logout</a>
+</div>
+
+  <div class="content overflow-auto" style="height: 90%">
+    <router-outlet></router-outlet>
+  </div>
+

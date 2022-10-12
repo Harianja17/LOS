@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+.border-top-primary {
+  border-top: 2px solid #f7911dc5;
+}
+
+.border-bottom-primary {
+  border-bottom: 2px solid #f7911dc5;
+}
+
+.border-left-primary {
+  border-left: 2px solid #f7911dc5;
+}
+
+.border-right-primary {
+  border-right: 2px solid #f7911dc5;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 18px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
