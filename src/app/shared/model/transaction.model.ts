@@ -2,8 +2,7 @@
 
 export interface CustomerResponse {
     id: string;
-    firstName: string;
-    lastName: string;
+    fullName: string;
     dateOfBirth: Date;
     phone: string;
     status: string;
@@ -11,13 +10,12 @@ export interface CustomerResponse {
   }
 export interface TransactionResponse {
     id: string;
-    customer: CustomerResponse,
-    nominal: number;
-    tenor:number;
-    approvalStatus: string;
-    transactionDate:Date;
+    fullName: string,
+    nominalLoan: number;
+    installmentType:number;
+    trxStatus: string;
+    trxDate:Date;
     disbursementDate?:Date;
-    transactionDetailResponses?: TransactionDetailResponse[];
   }
   export interface TransactionDetailResponse {
     id: string;

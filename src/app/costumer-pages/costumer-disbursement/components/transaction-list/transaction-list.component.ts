@@ -12,7 +12,7 @@ export class TransactionListComponent implements OnInit {
 
   pageTitle:string='Disbursement'
 
-  transactions: TransactionResponse[]=[{id:'123',customer:{firstName:'Mark',lastName:'Lee',id:'',dateOfBirth: new Date('2022-01-01'),phone:'',status:'',userId:''},nominal:250000,tenor:6,approvalStatus:'On Progress',transactionDate:new Date('2022-10-01')}];
+  transactions: TransactionResponse[]=[];
   currentPaginate: { [key: string]: any } = {page: 1, size: 5};
   paginate?: Omit<PageResponse<any>, "content">
 
@@ -21,10 +21,10 @@ export class TransactionListComponent implements OnInit {
   ngOnInit(): void {
     this.getTransactions()
   }
-  statusClass(approvalStatus: string): string {
-    if (approvalStatus === 'Disbursed') return 'disbursed';
-    if (approvalStatus === 'Failed') return 'failed';
-    if (approvalStatus === 'On Progress') return 'on progress';
+  statusClass(disbursementStatus: string): string {
+    if (disbursementStatus=== 'Disbursed') return 'disbursed';
+    if (disbursementStatus === 'Failed') return 'failed';
+    if (disbursementStatus === 'On Progress') return 'on progress';
     return '';
   }
 
@@ -52,7 +52,7 @@ export class TransactionListComponent implements OnInit {
             if(a==='12345'){
               const existing = this.transactions.find(x => x.id === trans.id);
               if (existing) {
-                existing.approvalStatus = 'Disbursed';
+                existing.trxStatus = 'Disbursed';
                 existing.disbursementDate= new Date();
                
               }

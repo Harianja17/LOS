@@ -23,7 +23,7 @@
       </div>
     </div>
   
-    <!-- <ng-container *ngIf="transactions && paginate"> -->
+    <ng-container *ngIf="transactions && paginate">
       <div class="table-responsive-md mx-3 bdr">
       <table class="table table-bordered" style="border-color: #f79323;">
         <thead>
@@ -40,14 +40,13 @@
         </thead>
         <tbody>
         <tr *ngFor="let data of transactions ; let i = index">
-          <!-- <td>{{(currentPaginate['page'] - 1) * paginate.size + (i + 1)}}</td> -->
-          <td>{{i+1}}</td>
-          <td>{{data.customer.firstName}} {{data.customer.lastName}}</td>
-          <td>{{data.tenor}}</td>
-          <td>{{data.transactionDate | date: 'yyyy-MM-dd'}}</td>
-          <td><span [ngClass]="statusClass(data.approvalStatus)" class="approval-status">{{data.approvalStatus}}</span></td>
+          <td>{{(currentPaginate['page'] - 1) * paginate.size + (i+1)}}</td>
+          <td>{{data.fullName}}</td>
+          <td>{{data.installmentType}}</td>
+          <td>{{data.trxDate | date: 'yyyy-MM-dd'}}</td>
+          <td><span [ngClass]="statusClass(data.trxStatus)" class="approval-status">{{data.trxStatus}}</span></td>
           <td>{{data.disbursementDate | date: 'yyyy-MM-dd'}}</td>
-          <td>{{data.nominal}}</td>
+          <td>{{data.nominalLoan}}</td>
           <td class="actions">
             <div class="d-flex justify-content-center">
               <button type="button" class="btn btn-primary text-white me-2" (click)="onApproved(data)">
@@ -71,12 +70,12 @@
         </tfoot>
       </table>
     </div>   
-     <!-- <pagination-controls
+     <pagination-controls
         previousLabel="Prev"
         nextLabel="Next"
         (pageChange)="onTableDataChange($event)">
-      </pagination-controls>  -->
-    <!-- </ng-container> -->
+      </pagination-controls> 
+    </ng-container> 
   </div>
     </div>
   </div>

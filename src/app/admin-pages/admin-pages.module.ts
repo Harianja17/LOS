@@ -15,6 +15,7 @@ import { ComponentsComponent } from './admin-disbursement/components/transaction
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountListComponent } from './admin-disbursement/components/account-list/account-list.component';
 import { TransactionDetailComponent } from './admin-disbursement/components/transaction-detail/transaction-detail.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { TransactionDetailComponent } from './admin-disbursement/components/tran
     AdminPagesRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ]
 })
 

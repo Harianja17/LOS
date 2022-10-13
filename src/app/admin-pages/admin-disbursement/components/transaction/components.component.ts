@@ -24,12 +24,15 @@ export class ComponentsComponent implements OnInit {
     private readonly transactionService:ServiceService) { }
 
   ngOnInit(): void {
+    this.transactionService.notify().subscribe(() => {
+      this.getTransactions();
+    })
     this.getTransactions()
   }
-  statusClass(approvalStatus: string): string {
-    if (approvalStatus === 'Disbursed') return 'disbursed';
-    if (approvalStatus === 'Failed') return 'failed';
-    if (approvalStatus === 'On Progress') return 'on progress';
+  statusClass(disbursementStatus: string): string {
+    if (disbursementStatus === 'Disbursed') return 'disbursed';
+    if (disbursementStatus === 'Failed') return 'failed';
+    if (disbursementStatus === 'On Progress') return 'on progress';
     return '';
   }
 
@@ -48,7 +51,9 @@ export class ComponentsComponent implements OnInit {
     ).subscribe({
       next: ({data})=>{
         console.log(data);
-        this.transactions=data.content;
+        // console.log('fullname'+data.data[0]);
+        
+        this.transactions=data.data;
         this.paginate=data;
         
       },
@@ -58,7 +63,7 @@ export class ComponentsComponent implements OnInit {
 
   async onTableDataChange(page: number) {
     this.currentPaginate = {...this.currentPaginate, page: page}
-    await this.router.navigateByUrl(`/transaction?page=${this.currentPaginate['page']}&size=${this.currentPaginate['size']}`)
+    await this.router.navigateByUrl(`/transactions?page=${this.currentPaginate['page']}&size=${this.currentPaginate['size']}`)
     this.getTransactions();
   }
   
@@ -81,8 +86,8 @@ export class ComponentsComponent implements OnInit {
             if(a==='12345'){
               const existing = this.transactions!.find(x => x.id === trans.id);
               if (existing) {
-                existing.approvalStatus = 'Disbursed';
-                existing.disbursementDate= new Date();
+                existing.trxStatus = 'Disbursed';
+                existing.trxDate= new Date();
                
               }
             }else{

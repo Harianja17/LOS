@@ -1,5 +1,5 @@
 export interface PageResponse<T> {
-  content: T[];
+  data: T[];
   count: number;
   totalPage: number;
   page: number;

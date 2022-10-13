@@ -39,7 +39,7 @@ const routes: Routes = [
         component : AdminDisbursementComponent,
         children: [
           {
-            path:'transaction',
+            path:'transactions',
             component: ComponentsComponent
           },
           {
