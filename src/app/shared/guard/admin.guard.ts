@@ -36,7 +36,9 @@ export class AdminGuard implements CanActivate, CanActivateChild {
     if (user && user.token) {
       return this.service.getUserFromToken().pipe(
         map(({data}): boolean => {
-          if (data.role === Role.MANAGER || data.role === Role.SUPERVISOR || data.role === Role.STAFF || data.role === Role.ADMIN) {
+          console.log('from admin guard',data);
+          
+          if (data['roleList'][0] === Role.MANAGER || data.roleList[0] === Role.SUPERVISOR || data.roleList[0] === Role.STAFF || data.roleList[0] === Role.ADMIN) {
             console.log('ADMIN GUARD PASSED');
             
             return true;

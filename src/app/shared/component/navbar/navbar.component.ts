@@ -12,14 +12,14 @@ export class NavbarComponent implements OnInit {
 
   constructor(private route : Router, private authService : AuthService) { }
 
-  identifierForView : string = ""
+  nikForView : string = ""
   roleForView : string  = ""
   roleAdminCheck : Boolean = false
 
   ngOnInit(): void {
     console.log();
     if(this.authService.getUserFromStorage()?.role){
-      this.identifierForView = this.authService.getUserFromStorage()!.identifier
+      this.nikForView = this.authService.getUserFromStorage()!.nik
       if(this.authService.getUserFromStorage()?.role!==Role.CUSTOMER){
       this.roleForView = this.authService.getUserFromStorage()!.role.toString().slice(5)
       this.roleAdminCheck = true

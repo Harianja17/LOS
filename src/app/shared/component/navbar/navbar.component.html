@@ -18,7 +18,7 @@
       class="btn btn-white text-primary"
       routerLink="/login"
     >
-      Hi <span [innerText]="identifierForView"></span>
+      Hi <span [innerText]="nikForView"></span>
     </button>
    
   </div>
@@ -32,7 +32,7 @@
         src="https://st4.depositphotos.com/11634452/21365/v/600/depositphotos_213659488-stock-illustration-picture-profile-icon-human-or.jpg"
         alt=""
       />
-      <div class="text-primary">{{identifierForView}}</div>
+      <div class="text-primary">{{nikForView}}</div>
       <h5 class="fw-bold" *ngIf="roleForView!=='CUSTOMER'">{{roleForView}}</h5>
     </div>
     <a class="btn text-start px-3 mx-4 my-2" (click)="dashboardRoute()"

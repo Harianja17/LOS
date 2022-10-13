@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
 
   loginForm: FormGroup = new FormGroup({
-    identifier : new FormControl(),
+    nik : new FormControl(),
     password : new FormControl(),
   })
 
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   login(){
       if(this.loginForm.valid){
       console.log(this.loginForm.value);
-      let data : any = {email:this.loginForm.value['identifier'],
+      let data : any = {nik:this.loginForm.value['nik'],
                           password:this.loginForm.value['password']}
 
       console.log(data);
@@ -39,13 +39,13 @@ export class LoginComponent implements OnInit {
         next : (res : any) => 
         {
           console.log(res)
-          let dataSent = {identifier:res.data.email, role:res.data.role, token:res.data.token}
+          let dataSent = {nik:res.data.nik, role:res.data.role, token:res.data.token}
           this.service.storeUser(dataSent) 
           
           Swal.fire({
                   icon: 'success',
                   title: 'Login Success',
-                  text: `Welcome ${dataSent.identifier}`
+                  text: `Welcome ${dataSent.nik}`
                 }).then(() => {
                   if(res.data.role==Role.MANAGER ||res.data.role==Role.SUPERVISOR ||res.data.role==Role.STAFF ||res.data.role==Role.ADMIN){
                     

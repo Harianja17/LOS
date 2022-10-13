@@ -4,6 +4,24 @@
     <div class="card">
       <div class="card-header bg-white p-4">
     <h2>Loan Transaction List</h2>
+    <div class="card-body d-flex">
+        <div class="col-md-12">
+          <div class="col-md-4 ms-auto">
+            <div class="input-group">
+              <input
+                type="search"
+                class="form-control rounded"
+                placeholder="Search"
+                aria-label="Search..."
+                aria-describedby="search-addon"
+              />
+              <button type="button" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
   
     <!-- <ng-container *ngIf="transactions && paginate"> -->
       <div class="table-responsive-md mx-3 bdr">
@@ -28,7 +46,7 @@
           <td>{{data.nominal}}</td>
           <td class="actions">
             <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-secondary text-white me-2" [routerLink]="['/detail', data.id]">
+                <button type="button" class="btn btn-secondary text-white me-2" routerLink='/disbursement/details'>
                   Detail
                 </button>
           </div>

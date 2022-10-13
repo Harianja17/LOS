@@ -8,6 +8,7 @@ import { AdminDisbursementComponent } from './admin-disbursement/admin-disbursem
 import { AccountListComponent } from './admin-disbursement/components/account-list/account-list.component';
 
 import { DetailComponent } from './admin-disbursement/components/detail/detail.component';
+import { TransactionDetailComponent } from './admin-disbursement/components/transaction-detail/transaction-detail.component';
 import { ComponentsComponent } from './admin-disbursement/components/transaction/components.component';
 import { AdminPagesComponent } from './admin-pages.component';
 import { AdminProspectComponent } from './admin-prospect/admin-prospect.component';
@@ -48,6 +49,10 @@ const routes: Routes = [
           {
             path:'account-list',
             component:AccountListComponent
+          },
+          {
+            path:'detail',
+            component:TransactionDetailComponent
           }
         ]
       },

@@ -12,11 +12,11 @@ export class AuthService {
   constructor(private readonly http:HttpClient) { }
 
   register(auth: AuthRequest): Observable<CommonResponse<UserResponse>> {
-    return this.http.post<CommonResponse<UserResponse>>('/api/auth/signup', auth);
+    return this.http.post<CommonResponse<UserResponse>>('/api/auth/register', auth);
   }
 
   login(auth: AuthRequest): Observable<any> {
-    return this.http.post<any>('/api/auth/signin', auth);
+    return this.http.post<CommonResponse<LoginResponse>>('/api/auth/login', auth);
   }
 
   getUserById(id: string): Observable<CommonResponse<UserResponse>> {

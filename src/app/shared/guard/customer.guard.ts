@@ -36,7 +36,7 @@ export class CustomerGuard implements CanActivate, CanActivateChild {
     if (user && user.token) {
       return this.service.getUserFromToken().pipe(
         map(({data}) => {
-          if (data.role === Role.CUSTOMER) {
+          if (data.roleList[0] === Role.CUSTOMER) {
             console.log('CUSTOMER GUARD PASSED');
             return true;
           }

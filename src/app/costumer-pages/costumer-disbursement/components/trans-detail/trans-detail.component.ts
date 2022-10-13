@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-transaction-detail',
-  templateUrl: './transaction-detail.component.html',
-  styleUrls: ['./transaction-detail.component.css']
+  selector: 'app-trans-detail',
+  templateUrl: './trans-detail.component.html',
+  styleUrls: ['./trans-detail.component.css']
 })
-export class TransactionDetailComponent implements OnInit {
+export class TransDetailComponent implements OnInit {
   pageTitle:string='Disbursement'
 
   constructor() { }
@@ -20,5 +20,4 @@ export class TransactionDetailComponent implements OnInit {
     paymentStatus: "STATUS",
     disbursementDate: new Date('2022-08-19')
     }
-
 }

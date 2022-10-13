@@ -1,21 +1,21 @@
 export interface AuthRequest {
-    identifier: string;
+    nik: string;
     password: string;
   }
   
   export interface UserResponse {
-    identifier: string;
-    role: string;
+    nik: string;
+    roleList: string[];
   }
   
   export interface LoginResponse {
-    identifier: string;
+    nik: string;
     role: string;
     token: string;
   }
   
   export enum AuthForm {
-    identifier = 'email',
+    nik = 'nik',
     password = 'password'
   }
   

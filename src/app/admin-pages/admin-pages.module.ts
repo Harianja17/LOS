@@ -16,7 +16,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountListComponent } from './admin-disbursement/components/account-list/account-list.component';
 import { TransactionDetailComponent } from './admin-disbursement/components/transaction-detail/transaction-detail.component';
 
-
 @NgModule({
   declarations: [
     AdminPagesComponent,
