@@ -1,42 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Disbursement } from 'src/app/shared/model/disbursement.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Disbursement, DisbursementResponseDTO } from 'src/app/shared/model/disbursement.model';
+import { map, switchMap } from 'rxjs';
+import { ServiceService } from '../../customer-trans-service.service';
 
 @Component({
-  selector: 'app-disbursement-form',
+  selector: 'app-disburse-form',
   templateUrl: './disbursement-form.component.html',
   styleUrls: ['./disbursement-form.component.css']
 })
-export class DisbursementFormComponent implements OnInit {
+export class DetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+    private transactionService: ServiceService,
+    private readonly router: Router) { }
 
   ngOnInit(): void {
+    
   }
-  disbursementData:Disbursement[]=[];
+  disbursementData:Disbursement={ disbursementId: '',
+    trxId: '',
+    customerBank: '',
+    customerAccountName: '',
+    customerAccountNumber: ''};
   pageTitle:string='Disbursement'
+  isUpdateButton: boolean = false;
+
 
   disbursementForm:FormGroup= new FormGroup({
-    customerBank: new FormControl(),
-    customerAccountName: new FormControl(),
-    customerAccountNumber: new FormControl()
+    disbursementId:new FormControl(''),
+    customerBank: new FormControl(''),
+    customerAccountName: new FormControl(''),
+    customerAccountNumber: new FormControl('')
 
   })
 
-  setDisbursementData(data:Disbursement){
-    this.disbursementForm.controls['customerBank'].setValue(data.customerBank)
-    this.disbursementForm.controls['customerAccountName'].setValue(data.customerAccountName)
-    this.disbursementForm.controls['customerAccountNumber'].setValue(data.customerAccountNumber)
-  }
-  submitData(data:any){
-    this.disbursementData.push(data);
-    console.log(this.disbursementData);
-    
-  }
+submitDisbursementData(disbursement:DisbursementResponseDTO){
+  this.disbursementData.customerAccountName = this.disbursementForm.value.customerAccountName;
+  this.disbursementData.customerAccountNumber = this.disbursementForm.value.customerAccountNumber;
+  this.disbursementData.customerBank = this.disbursementForm.value.customerBank;
 
-  getDetail(){
-    console.log(this.disbursementData);
+  this.transactionService.submitDisbursement(this.disbursementData).subscribe((val)=>{
+    console.log(val.data);
     
-  }
+  })
+}
 
 }

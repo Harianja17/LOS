@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { CompilerOptions, Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { CommonResponse } from 'src/app/shared/model/CommonResponse';
+import { CommonResponse, CommonResponseList } from 'src/app/shared/model/CommonResponse';
 import { Disbursement } from 'src/app/shared/model/disbursement.model';
 import { PageResponse } from 'src/app/shared/model/PageResponse';
-import { TransactionResponse } from 'src/app/shared/model/transaction.model';
+import { TransactionDetailResponse, TransactionResponse } from 'src/app/shared/model/transaction.model';
 
 
 @Injectable({
@@ -41,6 +41,10 @@ export class ServiceService {
   }
   approved(trxId:string): Observable<CommonResponse<TransactionResponse>> {
     return this.http.put<CommonResponse<TransactionResponse>>(`/api/transactions/?transactionId=${trxId}`,null);
+  }
+
+  getTransactiondetail(id:string):Observable<CommonResponse<CommonResponseList<TransactionDetailResponse>>>{
+    return this.http.get<CommonResponse<CommonResponseList<TransactionDetailResponse>>>('/api/transaction-details/'+id)
   }
 
 

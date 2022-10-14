@@ -25,7 +25,7 @@
             <tr class="col-9">:  6 Months</tr>
         </div>
 
-        <div>
+        <div >
             <h6>Installment</h6>
 
             <table class="table">
@@ -38,20 +38,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let data of tenorsList ; let i = index">
-                  <!-- <td>{{(currentPaginate['page'] - 1) * paginate.size + (i + 1)}}</td> -->
+                <tr *ngFor="let data of transactionDetails ; let i = index">
                   <td>{{i+1}}</td>
-                  <td>{{data.disbursementDate | date:'yyyy-MM-dd'}}</td>
+                  <td>{{data.installmentDate| date:'yyyy-MM-dd'}}</td>
                   <td>{{data.installmentTotal}}</td>
-                  <td> {{data.paymentStatus}} </td>
+                  <td> {{data.disbursementStatus}} </td>
                 
                 </tr>
                 </tbody>
               </table>
-        </div>
+        </div >
     </div>
       </div>
-      <a routerLink="/disbursement/transaction"><button class="btn btn-primary text-white m-5" > Back </button></a>
+      <a routerLink="/disbursement/transactions"><button class="btn btn-primary text-white m-5" > Back </button></a>
     </div>
   </div>
 

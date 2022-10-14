@@ -4,3 +4,7 @@ export interface CommonResponse<T> {
   message: string;
   data: T
 }
+export interface CommonResponseList<T>{
+  message: string;
+  data: T[]
+}

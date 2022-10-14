@@ -11,9 +11,9 @@ import { CostumerCreditSubmissionComponent } from './costumer-credit-submission/
 import { CostumerSurveyComponent } from './costumer-survey/costumer-survey.component';
 import { CostumerDisbursementComponent } from './costumer-disbursement/costumer-disbursement.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DisbursementFormComponent } from './costumer-disbursement/components/disbursement-form/disbursement-form.component';
 import { TransactionListComponent } from './costumer-disbursement/components/transaction-list/transaction-list.component';
 import { TransDetailComponent } from './costumer-disbursement/components/trans-detail/trans-detail.component';
+import { DetailComponent } from './costumer-disbursement/components/disbursement-form/disbursement-form.component';
 
 
 
@@ -26,9 +26,9 @@ import { TransDetailComponent } from './costumer-disbursement/components/trans-d
     CostumerCreditSubmissionComponent,
     CostumerSurveyComponent,
     CostumerDisbursementComponent,
-    DisbursementFormComponent,
     TransactionListComponent,
-    TransDetailComponent
+    TransDetailComponent,
+    DetailComponent
   ],
   imports: [
     CommonModule,

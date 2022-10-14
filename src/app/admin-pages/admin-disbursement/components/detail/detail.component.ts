@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Disbursement } from 'src/app/shared/model/disbursement.model';
-
+import { Banks, Disbursement } from 'src/app/shared/model/disbursement.model';
+import allBank from 'src/assets/allBank.json'
 
 @Component({
   selector: 'app-detail',
@@ -16,6 +16,10 @@ export class DetailComponent implements OnInit {
   }
   disbursementData:Disbursement[]=[];
   pageTitle:string='Disbursement'
+  bankName: Banks[] = allBank
+  getBankName(){
+    this.bankName
+  }
 
   disbursementForm:FormGroup= new FormGroup({
     customerBank: new FormControl(),

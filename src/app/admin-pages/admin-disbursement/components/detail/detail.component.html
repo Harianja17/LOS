@@ -19,10 +19,12 @@
             <label for class="form-label"> Bank </label>
             <div class="">
                 <select class="form-select" formControlName="customerBank" placeholder="Choose your bank">
-                  <option disabled value="">Choose Bank:</option>
-                  <option value="Bank Rakha">Bank Rakha</option>
-                  <option value="Bank Agung">Bank Agung</option>
-                  <option value="Bank Prana">Bank Prana</option>
+                  <option value="" disabled selected>
+                    Select your bank name
+                  </option>
+                  <option *ngFor="let item of bankName">
+                    {{ item.name }}
+                  </option>
                 </select>
               </div>
               

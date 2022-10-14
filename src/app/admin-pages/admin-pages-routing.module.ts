@@ -51,8 +51,13 @@ const routes: Routes = [
             component:AccountListComponent
           },
           {
-            path:'detail',
+            path:'detail/:id',
             component:TransactionDetailComponent
+          },
+          {
+
+              path:'detail',
+              component:TransactionDetailComponent
           }
         ]
       },

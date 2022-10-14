@@ -18,10 +18,8 @@ export interface TransactionResponse {
     disbursementDate?:Date;
   }
   export interface TransactionDetailResponse {
-    id: string;
-    transactionDate: number;
-    nominalData: number;
-    loanStatus: string;
-    createdAt: number;
-    updatedAt: number;
+    transactionDetailId: string;
+    installmentDate: Date;
+    installmentTotal: number;
+    disbursementStatus: string;
   }

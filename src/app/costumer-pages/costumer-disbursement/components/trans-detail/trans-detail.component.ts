@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map,switchMap } from 'rxjs';
+import { TransactionDetailResponse } from 'src/app/shared/model/transaction.model';
+import { ServiceService } from '../../customer-trans-service.service';
 
 @Component({
   selector: 'app-trans-detail',
@@ -8,16 +12,45 @@ import { Component, OnInit } from '@angular/core';
 export class TransDetailComponent implements OnInit {
   pageTitle:string='Disbursement'
 
-  constructor() { }
+  constructor(private readonly transactionService: ServiceService,
+    private readonly route: ActivatedRoute , private readonly router:Router) { }
 
+  transactionDetails:TransactionDetailResponse[]=[];
   ngOnInit(): void {
+    this.getDetails()
   }
-  tenorsList: any = 
-    {
-    id: "000",
-    paymentDue: 0,
-    installmentTotal: 0,
-    paymentStatus: "STATUS",
-    disbursementDate: new Date('2022-08-19')
+
+  getDetails(){
+
+    this.route.params.subscribe((params) => {
+      if (params && params['id']) {
+       this.route.queryParamMap.pipe(
+        switchMap((val)=>{
+          return this.transactionService.getTransactiondetail(params['id']).pipe(map(({data})=>{
+            if(Object.getOwnPropertyNames(val).length!==0){
+              return {params:val,data:data};
+            }
+            else{
+              return{params:{page:1,size:5,direction:'Desc'},data:data};
+            }
+          }))
+          
+        })
+       ).subscribe({
+        next:({data})=>{
+          console.log('datanya : ',data);
+          console.log(data);
+          
+        this.transactionDetails=data.data;
+          
+        }
+        ,error:console.error,
+       })
+       
+      }
+    })
+  
     }
+
+  
 }

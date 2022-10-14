@@ -79,7 +79,9 @@ setInstallment(event:any){
       error:console.error,
     })
   }
-
+  moveToDetails(data : TransactionResponse){
+    this.router.navigateByUrl("/disbursement/detail/"+data.trxId)
+  }
   async onTableDataChange(page: number) {
     this.currentPaginate = {...this.currentPaginate, page: page}
     await this.router.navigateByUrl(`/transactions?page=${this.currentPaginate['page']}&size=${this.currentPaginate['size']}`)

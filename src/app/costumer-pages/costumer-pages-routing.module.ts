@@ -5,7 +5,7 @@ import { AuthGuard } from '../shared/guard/auth.guard';
 import { CustomerGuard } from '../shared/guard/customer.guard';
 import { CostumerApprovalComponent } from './costumer-approval/costumer-approval.component';
 import { CostumerCreditSubmissionComponent } from './costumer-credit-submission/costumer-credit-submission.component';
-import { DisbursementFormComponent } from './costumer-disbursement/components/disbursement-form/disbursement-form.component';
+import { DetailComponent } from './costumer-disbursement/components/disbursement-form/disbursement-form.component';
 import { TransDetailComponent } from './costumer-disbursement/components/trans-detail/trans-detail.component';
 import { TransactionListComponent } from './costumer-disbursement/components/transaction-list/transaction-list.component';
 import { CostumerDisbursementComponent } from './costumer-disbursement/costumer-disbursement.component';
@@ -39,7 +39,7 @@ const routes: Routes = [
         children:[
           {
             path:'form',
-            component:DisbursementFormComponent
+            component:DetailComponent
           },
         {
           path:'list',
