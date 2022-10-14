@@ -10,17 +10,17 @@
       </div>
       <div class="col-md-10">
         <div class="col-md-4 ms-auto">
-          <div class="input-group">
-            <input
-              type="search"
-              class="form-control rounded"
-              placeholder="Search"
-              aria-label="Search..."
-              aria-describedby="search-addon"
-            />
-            <button type="button" class="btn btn-primary">
-              <i class="fas fa-search"></i>
-            </button>
+          <div class="mb-2">
+            <label for class="form-label"> Bank </label>
+            <div class="">
+                <select class="form-select" formControlName="customerBank" placeholder="Choose your bank">
+                  <option disabled value="">Choose Bank:</option>
+                  <option value="Bank Rakha">Bank Rakha</option>
+                  <option value="Bank Agung">Bank Agung</option>
+                  <option value="Bank Prana">Bank Prana</option>
+                </select>
+              </div>
+        </div>
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@
   </div>
     </div>
   </div>
-</div>
+
   
 
 

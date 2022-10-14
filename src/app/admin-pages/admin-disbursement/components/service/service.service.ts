@@ -16,13 +16,15 @@ export class ServiceService {
   constructor(private readonly http: HttpClient) { }
   accountList:Disbursement[]=[];
   getAllTransactions(params:any):Observable<CommonResponse<PageResponse<TransactionResponse>>>{
+    console.log(params);
+    
     let reqParams : any={};
     if (params){
       Object.keys(params).map(k=>{
         reqParams[k]=params[k];
       })
     }
-    return this.http.get<CommonResponse<PageResponse<TransactionResponse>>>(`/api/transactions?installment=THREE_MONTHS`)
+    return this.http.get<CommonResponse<PageResponse<TransactionResponse>>>(`/api/transactions/?installment=${params}`)
   }
 
   
@@ -37,6 +39,10 @@ export class ServiceService {
   notify(): Observable<void> {
     return this.transactionSubject.asObservable()
   }
+  approved(trxId:string): Observable<CommonResponse<TransactionResponse>> {
+    return this.http.put<CommonResponse<TransactionResponse>>(`/api/transactions/?transactionId=${trxId}`,null);
+  }
+
 
   
 }

@@ -18,7 +18,7 @@ export class ComponentsComponent implements OnInit {
   transactions?: TransactionResponse[];
   currentPaginate: { [key: string]: any } = {page: 1, size: 5};
   paginate?: Omit<PageResponse<any>, "content">
-
+  isPresent:boolean=true;
   constructor(private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly transactionService:ServiceService) { }
@@ -35,15 +35,34 @@ export class ComponentsComponent implements OnInit {
     if (disbursementStatus === 'On Progress') return 'on progress';
     return '';
   }
+  items = [
+    {name: "THREE_MONTHS", type: "type1"},
+    {name: "SIX_MONTHS", type: "type2"},
+    {name: "TWELVE_MONTHS", type: "type3"},
+    {name: "TWENTY_FOUR_MONTHS", type: "type4"},
+    {name: "THIRTY_SIX_MONTHS", type: "type5"}
 
+];
 
+installment:string='THREE_MONTHS'
+setInstallment(event:any){
+  this.getTransactions();
+  this.installment=event
+  console.log(this.installment);
+  
+  
+  
+}
   getTransactions(){
     this.route.queryParamMap.pipe(
       switchMap((val)=>{
-        return this.transactionService.getAllTransactions(val).pipe(map(({data})=>{
+        return this.transactionService.getAllTransactions(this.installment).pipe(map(({data})=>{
+          console.log(this.installment);
+          
           if(Object.getOwnPropertyNames(val).length!==0){
             return {params:val, data:data};
           }else{
+            this.isPresent=false;
             return {params:{page: 1, size: 5, direction: 'Desc'}, data:data};
           }
         }))
@@ -67,8 +86,8 @@ export class ComponentsComponent implements OnInit {
     this.getTransactions();
   }
   
-    onApproved(trans:TransactionResponse) {
-      console.log('mehods work');
+    onApproved(transId:string) {
+      console.log(transId);
  
       
       Swal.fire({
@@ -84,12 +103,15 @@ export class ComponentsComponent implements OnInit {
           else {
             let a = password
             if(a==='12345'){
-              const existing = this.transactions!.find(x => x.id === trans.id);
-              if (existing) {
-                existing.trxStatus = 'Disbursed';
-                existing.trxDate= new Date();
-               
-              }
+              console.log(transId);
+              
+                this.transactionService.approved(transId).subscribe((val)=>{
+                  console.log(val.data.trxId);
+                  
+                })
+                console.log('Works');
+                
+          
             }else{
               Swal.showValidationMessage(`Password Incorrect`)
             }

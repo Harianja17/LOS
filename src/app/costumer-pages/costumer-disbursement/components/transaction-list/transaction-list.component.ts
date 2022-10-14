@@ -50,7 +50,7 @@ export class TransactionListComponent implements OnInit {
           else {
             let a = password
             if(a==='12345'){
-              const existing = this.transactions.find(x => x.id === trans.id);
+              const existing = this.transactions.find(x => x.trxId === trans.trxId);
               if (existing) {
                 existing.trxStatus = 'Disbursed';
                 existing.disbursementDate= new Date();

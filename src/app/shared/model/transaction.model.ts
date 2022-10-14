@@ -9,7 +9,7 @@ export interface CustomerResponse {
     userId: string;
   }
 export interface TransactionResponse {
-    id: string;
+    trxId: string;
     fullName: string,
     nominalLoan: number;
     installmentType:number;
