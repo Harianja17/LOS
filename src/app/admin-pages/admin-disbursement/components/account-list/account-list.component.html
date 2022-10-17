@@ -68,8 +68,8 @@
     nextLabel="Next"
     (pageChange)="onTableDataChange()" (pageBoundsCorrection)="onTableDataChange()" >
   </pagination-controls>  -->
-  <button (click)="onTableDataChangePrev()" *ngIf="pageNumber>0">Prev</button>
-  <button (click)="onTableDataChangeNext()" *ngIf="pageNumber<data.totalPages-1">Next</button>
+  <button class="btn btn-primary text-white m-2" (click)="onTableDataChangePrev()" *ngIf="pageNumber>0">Prev</button>
+  <button class="btn btn-primary text-white m-2" (click)="onTableDataChangeNext()" *ngIf="pageNumber<data.totalPages-1">Next</button>
   
     <!-- </ng-container> -->
   </div>

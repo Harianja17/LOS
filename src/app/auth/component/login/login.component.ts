@@ -13,7 +13,7 @@ import { AuthService } from '../../service/auth.service';
 export class LoginComponent implements OnInit {
 
   constructor(private router : Router, private service : AuthService) { }
-
+  showPassword: boolean = false;
   ngOnInit(): void {
   }
 
@@ -71,5 +71,9 @@ export class LoginComponent implements OnInit {
 
   register(){
     Swal.fire('Register button was clicked')
+  }
+
+  toggleChecked(e: any) {
+    this.showPassword = e.target.checked
   }
 }

@@ -27,6 +27,9 @@
                   </option>
                 </select>
               </div>
+              <div *ngIf="form('customerBank').invalid && form('customerBank').dirty || form('customerBank').touched">
+                <div class="alert alert-danger" *ngIf="form('customerBank').errors?.['required']"> This field is required</div>
+            </div>
               
         </div>
       </div>
@@ -40,19 +43,26 @@
         <div class="mb-2">
           <label for class="form-label"> Account Name</label>
           <input type="text" class="form-control" placeholder="Enter account name" formControlName="customerAccountName"/>
+          <div *ngIf="form('customerAccountName').invalid && form('customerAccountName').dirty || form('customerAccountName').touched">
+            <div class="alert alert-danger" *ngIf="form('customerAccountName').errors?.['required']"> This field is required</div>
+        </div>
+          
         </div>
         <div class="mb-2">
           <label for class="form-label"> Account Number</label>
           <input type="text" class="form-control" placeholder="Enter account number" formControlName="customerAccountNumber"/>
+          <div *ngIf="form('customerAccountNumber').invalid && form('customerAccountNumber').dirty || form('customerAccountNumber').touched">
+            <div class="alert alert-danger" *ngIf="form('customerAccountNumber').errors?.['required']"> This field is required</div>
+        </div>
       </div>
     </div>
 </div>
 </div>
 <div class="d-flex mb-5 justify-content-center">
-  <button type="submit" class="btn btn-primary text-white me-2">
-    {{isUpdateButton ? "Update" : "Submit"}}
+  <button type="submit" class="btn btn-primary text-white me-2" routerLink="/disbursement/transactions">
+    Submit
     </button>
-    <button type="submit" class="btn btn-secondary text-white me-2">
+    <button type="button" class="btn btn-secondary text-white me-2" (click)="clearForm()">
       Cancel
     </button>
 </div>

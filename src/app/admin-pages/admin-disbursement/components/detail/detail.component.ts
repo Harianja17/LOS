@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Banks, Disbursement, DisbursementResponseDTO } from 'src/app/shared/model/disbursement.model';
 import { ServiceService } from '../service/service.service';
 import { map, switchMap } from 'rxjs';
 import allBank from 'src/assets/allBank.json'
+import Swal from 'sweetalert2';
+import { TransactionResponse } from 'src/app/shared/model/transaction.model';
 
 @Component({
   selector: 'app-detail',
@@ -43,9 +45,9 @@ export class DetailComponent implements OnInit {
 
   disbursementForm:FormGroup= new FormGroup({
     disbursementId:new FormControl(''),
-    customerBank: new FormControl(''),
-    customerAccountName: new FormControl(''),
-    customerAccountNumber: new FormControl('')
+    customerBank: new FormControl(null, Validators.required),
+    customerAccountName: new FormControl(null, Validators.required),
+    customerAccountNumber: new FormControl(null, Validators.required)
 
   })
 
@@ -169,6 +171,45 @@ console.log('method');
     console.log(this.disbursementData);
     
   }
-  // disbursementData:Disbursement[]=[]; 
+  form(property:string):FormGroup{
+    return this.disbursementForm.get(property) as FormGroup;
+  }
+  clearForm(){
+    this.disbursementForm.reset();
+  }
+  onApproved(trans:TransactionResponse) {
+    console.log(trans);
+
+    
+    Swal.fire({
+      title: 'Confirm Password',
+      input: 'password',
+      confirmButtonText: 'Submit',
+      focusConfirm: false,
+      showLoaderOnConfirm: true,
+      preConfirm: (password) => {
+        if (password=='') {
+          Swal.showValidationMessage(`Please enter verification password`)
+        }
+        else {
+          let a = password
+          if(a==='12345'){
+            console.log(trans);
+            
+              this.transactionService.approved(trans.trxId).subscribe((val)=>{
+                console.log(val.data.trxId);
+                
+              })
+              
+              
+        
+          }else{
+            Swal.showValidationMessage(`Password Incorrect`)
+          }
+          
+        }
+      }
+    })
+  }
 
 }

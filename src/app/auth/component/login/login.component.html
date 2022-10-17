@@ -20,11 +20,15 @@
             <div class="input-group mb-3">
               <span class="input-group-text" id="password"> 🔑 </span>
               <input
-                type="password"
+                type="!showPassword ? 'password' : 'text'"
                 class="form-control"
                 placeholder="Kata Sandi"
                 aria-describedby="password" id="password" formControlName="password"
               />
+              <div class="check-show-password">
+                <input type="checkbox" (change)="toggleChecked($event)" name="show-password" id="show-password">
+                <label for="show-password">Show Password</label>
+              </div>
             </div>
           </form>
 
@@ -41,7 +45,7 @@
             </div>
             <hr>
             <div class="d-grid gap-2 mt-2 text-center">
-              <p>Dont have any account? <a style="text-decoration: none;" class="link-primary text-primary" (click)="register()">Register</a></p>
+              <p>Don't have account? <a style="text-decoration: none;" class="link-primary text-primary" (click)="register()">Register</a></p>
             </div>
           </div>
         </div>

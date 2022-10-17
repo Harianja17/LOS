@@ -23,5 +23,5 @@ export interface TransactionResponse {
     transactionDetailId: string;
     installmentDate: Date;
     installmentTotal: number;
-    disbursementStatus: string;
+    disburtmentStatus: string;
   }

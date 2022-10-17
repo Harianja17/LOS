@@ -13,7 +13,6 @@ import { CostumerDisbursementComponent } from './costumer-disbursement/costumer-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransactionListComponent } from './costumer-disbursement/components/transaction-list/transaction-list.component';
 import { TransDetailComponent } from './costumer-disbursement/components/trans-detail/trans-detail.component';
-import { DetailComponent } from './costumer-disbursement/components/disbursement-form/disbursement-form.component';
 
 
 
@@ -27,8 +26,7 @@ import { DetailComponent } from './costumer-disbursement/components/disbursement
     CostumerSurveyComponent,
     CostumerDisbursementComponent,
     TransactionListComponent,
-    TransDetailComponent,
-    DetailComponent,
+    TransDetailComponent
   ],
   imports: [
     CommonModule,

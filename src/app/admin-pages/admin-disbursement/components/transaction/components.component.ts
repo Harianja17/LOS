@@ -5,6 +5,7 @@ import { TransactionResponse } from 'src/app/shared/model/transaction.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceService } from '../service/service.service';
 import { map, switchMap } from 'rxjs';
+import { AuthService } from 'src/app/auth/service/auth.service';
 
 
 @Component({
@@ -13,15 +14,16 @@ import { map, switchMap } from 'rxjs';
   styleUrls: ['./components.component.css']
 })
 export class ComponentsComponent implements OnInit {
-  pageTitle:string='Disbursement'
 
+  pageTitle:string='Disbursement'
   transactions?: TransactionResponse[];
   currentPaginate: { [key: string]: any } = {page: 1, size: 5};
   paginate?: Omit<PageResponse<any>, "content">
   isPresent:boolean=true;
   constructor(private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly transactionService:ServiceService) { }
+    private readonly transactionService:ServiceService,
+    private readonly authService:AuthService) { }
 
   ngOnInit(): void {
     this.transactionService.notify().subscribe(() => {
@@ -29,12 +31,7 @@ export class ComponentsComponent implements OnInit {
     })
     this.getTransactions()
   }
-  statusClass(disbursementStatus: string): string {
-    if (disbursementStatus === 'Disbursed') return 'disbursed';
-    if (disbursementStatus === 'Failed') return 'failed';
-    if (disbursementStatus === 'On Progress') return 'on progress';
-    return '';
-  }
+
   items = [
     {name: "SIX_MONTHS", type: "type2"},
     {name: "TWELVE_MONTHS", type: "type3"},
@@ -86,39 +83,61 @@ setInstallment(event:any){
     await this.router.navigateByUrl(`/transactions?page=${this.currentPaginate['page']}&size=${this.currentPaginate['size']}`)
     this.getTransactions();
   }
-  
-    onApproved(trans:TransactionResponse) {
-      console.log(trans);
- 
-      
-      Swal.fire({
-        title: 'Confirm Password',
-        input: 'password',
-        confirmButtonText: 'Submit',
-        focusConfirm: false,
-        showLoaderOnConfirm: true,
-        preConfirm: (password) => {
-          if (password=='') {
-            Swal.showValidationMessage(`Please enter verification password`)
-          }
-          else {
-            let a = password
-            if(a==='12345'){
-              console.log(trans);
-              
+
+  moveToForm(trans: TransactionResponse) {
+    Swal.fire({
+      title: 'Confirm Password',
+      input: 'password',
+      confirmButtonText: 'Submit',
+      showCancelButton: true,
+      focusConfirm: false,
+      showLoaderOnConfirm: true}).then((result)=>{
+        if(result.isConfirmed){
+          console.log(this.authService.getUserFromToken().subscribe((res)=>{
+            let confirmAuth = {nik:res.data.nik,password:result.value}
+            this.authService.login(confirmAuth).subscribe((res2)=>{
+              if (confirmAuth.nik===res2.data.nik){
                 this.transactionService.approved(trans.trxId).subscribe((val)=>{
-                  console.log(val.data.trxId);
-                  
-                })
-                
-                
-          
-            }else{
-              Swal.showValidationMessage(`Password Incorrect`)
-            }
+                  this.router.navigateByUrl('disbursement/disbursement-form/');            
+                  })
+              }
+              
+              
+            });
             
-          }
+          }));
+          
+          
         }
       })
-    }
+  //     preConfirm: (password) => {
+  //       if (password=='') {
+  //         Swal.showValidationMessage(`Please enter verification password`)
+  //       }
+  //       else {
+  //         let a = password
+  //         console.log(this.authService.getUserFromToken());
+           
+
+  //         // if(a==='12345'){
+  //         //   console.log(trans);
+            
+  //         //     this.transactionService.approved(trans.trxId).subscribe((val)=>{
+  //         //       console.log(val.data.trxId);
+                
+  //         //     })
+              
+              
+        
+  //         // }else{
+  //         //   Swal.showValidationMessage(`Password Incorrect`)
+  //         // }
+          
+  //       }
+  //     }
+  //   })
+  //   // this.router.navigateByUrl('disbursement/disbursement-form/'+trans.trxId);
+
+  // }
+}
 }
