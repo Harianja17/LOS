@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PageResponse } from 'src/app/shared/model/PageResponse';
 import { TransactionResponse } from 'src/app/shared/model/transaction.model';
 import Swal from 'sweetalert2';
+import { ServiceService } from '../../customer-trans-service.service';
+import { map, switchMap } from 'rxjs';
+import { AuthService } from 'src/app/auth/service/auth.service';
+
+
 
 @Component({
   selector: 'app-transaction-list',
@@ -11,15 +17,28 @@ import Swal from 'sweetalert2';
 export class TransactionListComponent implements OnInit {
 
   pageTitle:string='Disbursement'
-
+  isPresent:boolean=true;
   transactions: TransactionResponse[]=[];
   currentPaginate: { [key: string]: any } = {page: 1, size: 5};
   paginate?: Omit<PageResponse<any>, "content">
 
-  constructor() { }
+  constructor(private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly authService: AuthService,
+    private readonly transactionService:ServiceService) { }
 
   ngOnInit(): void {
-    this.getTransactions()
+    this.authService.getUserFromToken()
+    .subscribe(data => {
+      this.nik=data.data.nik
+      console.log(this.nik);
+      this.getTransactions();
+    });
+    // this.transactionService.notify().subscribe(() => {
+    //   this.getTransactions();
+    // })
+   
+    
   }
   statusClass(disbursementStatus: string): string {
     if (disbursementStatus=== 'Disbursed') return 'disbursed';
@@ -27,41 +46,54 @@ export class TransactionListComponent implements OnInit {
     if (disbursementStatus === 'On Progress') return 'on progress';
     return '';
   }
+  items = [
+    {name: "SIX_MONTHS", type: "type2"},
+    {name: "TWELVE_MONTHS", type: "type3"},
+    {name: "TWENTY_FOUR_MONTHS", type: "type4"},
+    {name: "THIRTY_SIX_MONTHS", type: "type5"}
 
+];
+nik:string='';
+installment:string='SIX_MONTHS'
+setInstallment(event:any){
+
+  this.installment=event
+  this.getTransactions();
+  
+}
 
   getTransactions(){
-    this.transactions
+    this.route.queryParamMap.pipe(
+      switchMap((val)=>{
+        console.log(this.nik);
+        
+        return this.transactionService.getAllTransactions(this.installment,this.nik).pipe(map(({data})=>{
+         console.log(data);
+         
+          
+          if(Object.getOwnPropertyNames(val).length!==0){
+            return {params:val, data:data};
+          }else{
+            this.isPresent=false;
+            return {params:{page: 1, size: 5, direction: 'Desc'}, data:data};
+          }
+        }))
+      })
+    ).subscribe({
+      next: ({data})=>{
+        console.log(data);
+        // console.log('fullname'+data.data[0]);
+        
+        this.transactions=data.data;
+        this.paginate=data;
+        
+      },
+      error:console.error,
+    })
+  }
+  moveToDetails(data : TransactionResponse){
+    this.router.navigateByUrl("/disbursement/details/"+data.trxId)
   }
   
-    onApproved(trans:TransactionResponse) {
-      console.log('mehods work');
- 
-      
-      Swal.fire({
-        title: 'Confirm Password',
-        input: 'password',
-        confirmButtonText: 'Submit',
-        focusConfirm: false,
-        showLoaderOnConfirm: true,
-        preConfirm: (password) => {
-          if (password=='') {
-            Swal.showValidationMessage(`Please enter verification password`)
-          }
-          else {
-            let a = password
-            if(a==='12345'){
-              const existing = this.transactions.find(x => x.trxId === trans.trxId);
-              if (existing) {
-                existing.trxStatus = 'Disbursed';
-                existing.disbursementDate= new Date();
-               
-              }
-            }else{
-              Swal.showValidationMessage(`Password Incorrect`)
-            }
-            
-          }
-        }
-      })
-    }
+
 }

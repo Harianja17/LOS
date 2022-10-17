@@ -36,7 +36,6 @@ export class ComponentsComponent implements OnInit {
     return '';
   }
   items = [
-    {name: "THREE_MONTHS", type: "type1"},
     {name: "SIX_MONTHS", type: "type2"},
     {name: "TWELVE_MONTHS", type: "type3"},
     {name: "TWENTY_FOUR_MONTHS", type: "type4"},
@@ -44,15 +43,15 @@ export class ComponentsComponent implements OnInit {
 
 ];
 
-installment:string='THREE_MONTHS'
+installment:string='SIX_MONTHS'
 setInstallment(event:any){
-  this.getTransactions();
+
   this.installment=event
-  console.log(this.installment);
-  
-  
+  this.getTransactions();
   
 }
+
+
   getTransactions(){
     this.route.queryParamMap.pipe(
       switchMap((val)=>{
@@ -88,8 +87,8 @@ setInstallment(event:any){
     this.getTransactions();
   }
   
-    onApproved(transId:string) {
-      console.log(transId);
+    onApproved(trans:TransactionResponse) {
+      console.log(trans);
  
       
       Swal.fire({
@@ -105,13 +104,13 @@ setInstallment(event:any){
           else {
             let a = password
             if(a==='12345'){
-              console.log(transId);
+              console.log(trans);
               
-                this.transactionService.approved(transId).subscribe((val)=>{
+                this.transactionService.approved(trans.trxId).subscribe((val)=>{
                   console.log(val.data.trxId);
                   
                 })
-                console.log('Works');
+                
                 
           
             }else{

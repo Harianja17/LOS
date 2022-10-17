@@ -10,17 +10,13 @@
       </div>
       <div class="col-md-10">
         <div class="col-md-4 ms-auto">
-          <div class="mb-2">
-            <label for class="form-label"> Bank </label>
-            <div class="">
-                <select class="form-select" formControlName="customerBank" placeholder="Choose your bank">
-                  <option disabled value="">Choose Bank:</option>
-                  <option value="Bank Rakha">Bank Rakha</option>
-                  <option value="Bank Agung">Bank Agung</option>
-                  <option value="Bank Prana">Bank Prana</option>
-                </select>
-              </div>
-        </div>
+          <div class="">
+            <select [(ngModel)]="selectedOption" class="form-select" id="size" placeholder="Choose your data" (change)="loadAccounts()">
+              <option disabled value="">Choose Row:</option>
+              <option *ngFor="let o of options" >
+                {{o.name}}
+             </option>
+            </select>
           </div>
         </div>
       </div>
@@ -39,22 +35,25 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let data of accountList ; let i = index">
+        <tr *ngFor="let data of disbursementList; let i = index">
           <!-- <td>{{(currentPaginate['page'] - 1) * paginate.size + (i + 1)}}</td> -->
+        
           <td>{{i+1}}</td>
           <td>{{data.customerBank}}</td>
           <td>{{data.customerAccountName}}</td>
           <td>{{data.customerAccountNumber}}</td>
           <td class="actions">
             <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-primary text-white me-2" >
+                <button type="button"(click)="moveToForm(data)" class="btn btn-primary text-white me-2" >
                     Update
+                    
                   </button>
-                  <button type="button" class="btn btn-secondary text-white me-2">
+                  <button type="button" (click)="deleteDisbursement(data)" class="btn btn-secondary text-white me-2">
                     Delete
                   </button>
             </div>
         </td>
+      
         </tr>
         </tbody>
         <tfoot>
@@ -64,17 +63,19 @@
         </tfoot>
       </table>
     </div>
+    <!-- <pagination-controls
+    previousLabel="Prev"
+    nextLabel="Next"
+    (pageChange)="onTableDataChange()" (pageBoundsCorrection)="onTableDataChange()" >
+  </pagination-controls>  -->
+  <button (click)="onTableDataChangePrev()" *ngIf="pageNumber>0">Prev</button>
+  <button (click)="onTableDataChangeNext()" *ngIf="pageNumber<data.totalPages-1">Next</button>
   
-      <!-- <pagination-controls
-        previousLabel="Prev"
-        nextLabel="Next"
-        (pageChange)="onTableDataChange($event)">
-      </pagination-controls> -->
     <!-- </ng-container> -->
   </div>
     </div>
   </div>
-
+</div>
   
 
 

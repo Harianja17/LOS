@@ -20,11 +20,15 @@ export class NavbarComponent implements OnInit {
     console.log();
     if(this.authService.getUserFromStorage()?.role){
       this.nikForView = this.authService.getUserFromStorage()!.nik
-      if(this.authService.getUserFromStorage()?.role!==Role.CUSTOMER){
+      console.log(this.authService.getUserFromStorage()?.role);
+      
+      if(this.authService.getUserFromStorage()?.role!=Role.CUSTOMER){
       this.roleForView = this.authService.getUserFromStorage()!.role.toString().slice(5)
       this.roleAdminCheck = true
     }
     }
+    console.log(this.roleAdminCheck+'Entah Apa');
+    
   }
 
   logOut(){

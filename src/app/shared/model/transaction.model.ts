@@ -10,12 +10,14 @@ export interface CustomerResponse {
   }
 export interface TransactionResponse {
     trxId: string;
-    fullName: string,
-    nominalLoan: number;
+    fullName: string;
     installmentType:number;
     trxStatus: string;
     trxDate:Date;
+    nik:string;
     disbursementDate?:Date;
+    nominalLoan: string;
+    isDelete:boolean;
   }
   export interface TransactionDetailResponse {
     transactionDetailId: string;

@@ -48,7 +48,12 @@ const routes: Routes = [
         {
           path:'details',
           component:TransDetailComponent
-        }]
+        },
+        {
+          path:'details/:id',
+          component:TransDetailComponent
+        },
+      ]
       },
             {
         path : 'prospect',

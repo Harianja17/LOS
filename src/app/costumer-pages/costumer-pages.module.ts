@@ -28,7 +28,7 @@ import { DetailComponent } from './costumer-disbursement/components/disbursement
     CostumerDisbursementComponent,
     TransactionListComponent,
     TransDetailComponent,
-    DetailComponent
+    DetailComponent,
   ],
   imports: [
     CommonModule,

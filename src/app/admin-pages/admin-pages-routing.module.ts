@@ -58,7 +58,11 @@ const routes: Routes = [
 
               path:'detail',
               component:TransactionDetailComponent
-          }
+          },
+          {
+            path:'disbursement-form/:id',
+            component:DetailComponent
+          },
         ]
       },
             {

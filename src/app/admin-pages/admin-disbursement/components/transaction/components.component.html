@@ -47,17 +47,13 @@
           <td>{{data.nominalLoan}}</td>
           <td class="actions">
             <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-primary text-white me-2" (click)="onApproved(data.trxId)">
+              <button type="button" class="btn btn-primary text-white me-2" (click)="onApproved(data)">
                   Disburse
                 </button>
                 <button type="button" class="btn btn-secondary text-white me-2" (click)="moveToDetails(data)">
                   Detail
                 </button>
           </div>
-            <!-- <a (click)="onApproved(data)">
-                  Action
-            </a>
-          <span class="detail" [routerLink]="['/detail', data.id]">Details</span> -->
         </td>
         </tr>
         </tbody>

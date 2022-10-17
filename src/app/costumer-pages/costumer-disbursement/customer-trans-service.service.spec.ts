@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+// import { TestBed } from '@angular/core/testing';
 
-import { CustomerTransServiceService } from './customer-trans-service.service';
+// import { CustomerTransServiceService } from './customer-trans-service.service';
 
-describe('CustomerTransServiceService', () => {
-  let service: CustomerTransServiceService;
+// describe('CustomerTransServiceService', () => {
+//   let service: CustomerTransServiceService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(CustomerTransServiceService);
-  });
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({});
+//     service = TestBed.inject(CustomerTransServiceService);
+//   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+//   it('should be created', () => {
+//     expect(service).toBeTruthy();
+//   });
+// });

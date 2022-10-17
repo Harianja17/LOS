@@ -37,25 +37,20 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let data of transactions ; let i = index">
-          <!-- <td>{{(currentPaginate['page'] - 1) * paginate.size + (i + 1)}}</td> -->
-          <td>{{i+1}}</td>
-          <td>{{data.installmentType}}</td>
-          <td><span [ngClass]="statusClass(data.trxStatus)" class="approval-status">{{data.trxStatus}}</span></td>
-          <td>{{data.disbursementDate | date: 'yyyy-MM-dd'}}</td>
-          <td>{{data.nominalLoan}}</td>
-          <td class="actions">
-            <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-secondary text-white me-2" routerLink='/disbursement/details'>
-                  Detail
-                </button>
-          </div>
-            <!-- <a (click)="onApproved(data)">
-                  Action
-            </a>
-          <span class="detail" [routerLink]="['/detail', data.id]">Details</span> -->
-        </td>
-        </tr>
+          <tr *ngFor="let data of transactions ; let i = index">
+            <td>{{(i+1)}}</td>
+            <td>{{data.installmentType}}</td>
+            <td>{{data.trxStatus}}</td>
+            <td>{{data.disbursementDate | date: 'yyyy-MM-dd'}}</td>
+            <td>{{data.nominalLoan}}</td>
+            <td class="actions">
+              <div class="d-flex justify-content-center">
+                  <button type="button" class="btn btn-secondary text-white me-2" (click)="moveToDetails(data)">
+                    Detail
+                  </button>
+            </div>
+          </td>
+          </tr>
         </tbody>
         <tfoot>
           <tr style="background-color: #f1b16d; height: 33px;">

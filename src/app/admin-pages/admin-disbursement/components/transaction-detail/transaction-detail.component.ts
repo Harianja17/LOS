@@ -15,18 +15,21 @@ export class TransactionDetailComponent implements OnInit {
   constructor(private readonly transactionService: ServiceService,
     private readonly route: ActivatedRoute , private readonly router:Router) { }
   transactionDetails:TransactionDetailResponse[]=[];
+  transaction?:TransactionResponse;
+  nameCustomer:String ='';
+  loanCredit:String='';
+  disbursementStatus :String ='';
+  tenor:String='';
+
   ngOnInit(): void {
     this.getDetails()
   }
 
-  getDetails(){
-    // this.transactionService.getTransactiondetail().subscribe((val)=>{
-    //   console.log(val.data);
-      
-      
-    // })
+
+  getDetails(){    
     this.route.params.subscribe((params) => {
       if (params && params['id']) {
+        // console.log('param : '+params['id'].trxId);
        this.route.queryParamMap.pipe(
         switchMap((val)=>{
           return this.transactionService.getTransactiondetail(params['id']).pipe(map(({data})=>{
@@ -36,6 +39,8 @@ export class TransactionDetailComponent implements OnInit {
             else{
               return{params:{page:1,size:5,direction:'Desc'},data:data};
             }
+            
+
           }))
           
         })
@@ -43,6 +48,12 @@ export class TransactionDetailComponent implements OnInit {
         next:({data})=>{
           console.log('datanya : ',data);
           console.log(data);
+          this.nameCustomer = this.transactionService.nameCustomer;
+          this.loanCredit = this.transactionService.loanCredit;
+          this.tenor = this.transactionService.tenor;
+          this.disbursementStatus = this.transactionService.disbursementStatus;
+          console.log('customer name: '+this.nameCustomer);
+          
           
         this.transactionDetails=data.data;
           
