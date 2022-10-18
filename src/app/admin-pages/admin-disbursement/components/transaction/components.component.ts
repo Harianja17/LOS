@@ -99,7 +99,10 @@ setInstallment(event:any){
             this.authService.login(confirmAuth).subscribe((res2)=>{
               if (confirmAuth.nik===res2.data.nik){
                 this.transactionService.approved(trans.trxId).subscribe((val)=>{
-                  this.router.navigateByUrl('disbursement/disbursement-form/');            
+                  this.transactionService.getDisbursementByTrxID(trans.trxId).subscribe((val)=>{
+                    this.router.navigateByUrl('disbursement/disbursement-form/'+val.data.disbursementId); 
+                  })
+                            
                   })
               }
               
@@ -107,7 +110,6 @@ setInstallment(event:any){
             });
             
           })
-          
           
         }
       })

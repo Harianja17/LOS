@@ -67,6 +67,10 @@ export class ServiceService {
     return this.http.put<CommonResponse<Disbursement>>('api/disbursements/'+ disburse.disbursementId, disburse)
   }
 
+  getDisbursementByTrxID(id:string):Observable<CommonResponse<Disbursement>>{
+    return this.http.get<CommonResponse<Disbursement>>('api/disbursements/trx/'+id)
+  }
+
 
 
 }
