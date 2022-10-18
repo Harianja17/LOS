@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
     Swal.fire('Register button was clicked')
   }
 
-  toggleChecked(e: any) {
-    this.showPassword = e.target.checked
+  toggleChecked() {
+    this.showPassword = !this.showPassword
   }
 }

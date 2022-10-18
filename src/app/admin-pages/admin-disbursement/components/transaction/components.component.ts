@@ -110,34 +110,6 @@ setInstallment(event:any){
           
         }
       })
-  //     preConfirm: (password) => {
-  //       if (password=='') {
-  //         Swal.showValidationMessage(`Please enter verification password`)
-  //       }
-  //       else {
-  //         let a = password
-  //         console.log(this.authService.getUserFromToken());
-           
 
-  //         // if(a==='12345'){
-  //         //   console.log(trans);
-            
-  //         //     this.transactionService.approved(trans.trxId).subscribe((val)=>{
-  //         //       console.log(val.data.trxId);
-                
-  //         //     })
-              
-              
-        
-  //         // }else{
-  //         //   Swal.showValidationMessage(`Password Incorrect`)
-  //         // }
-          
-  //       }
-  //     }
-  //   })
-  //   // this.router.navigateByUrl('disbursement/disbursement-form/'+trans.trxId);
-
-  // }
 }
 }

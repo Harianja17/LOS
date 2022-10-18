@@ -13,6 +13,7 @@ import { CostumerDisbursementComponent } from './costumer-disbursement/costumer-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransactionListComponent } from './costumer-disbursement/components/transaction-list/transaction-list.component';
 import { TransDetailComponent } from './costumer-disbursement/components/trans-detail/trans-detail.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -33,7 +34,8 @@ import { TransDetailComponent } from './costumer-disbursement/components/trans-d
     SharedModule,
     CostumerPagesRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class CostumerPagesModule { }
