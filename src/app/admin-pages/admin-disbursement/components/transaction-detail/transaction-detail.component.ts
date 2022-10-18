@@ -47,13 +47,10 @@ export class TransactionDetailComponent implements OnInit {
         })
        ).subscribe({
         next:({data})=>{
-          console.log('datanya : ',data);
-          console.log(data);
           this.nameCustomer = data.fullName;
           this.loanCredit = data.nominalLoan;
           this.tenor = data.tenor;
           this.disbursementStatus = data.disbursementStatus;
-          console.log('customer name: '+this.nameCustomer);
           
           
         this.transactionDetails=data.data;

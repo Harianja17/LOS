@@ -24,6 +24,7 @@ data:any;
   // isDelete:false};
   
   pageNumber :number =0;
+  totalPages: number = 0;
   dataNotDelete:number=0;
     ngOnInit(): void {
     this.loadAccounts();
@@ -53,6 +54,7 @@ data:any;
       next: ({data})=>{
         console.log(data);
         // console.log('fullname'+data.data[0]);
+        this.totalPages = data.totalPage
         this.data = data;
         this.disbursementList = data.data;  
         console.log('LIST: '+this.disbursementList);

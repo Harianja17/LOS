@@ -10,19 +10,19 @@
         <div class="row">
             <td class="col-3">Customer Name</td>
             <!-- <tr class="col-1">:</tr> -->
-            <tr class="col-9">:  Om Burhan </tr>
+            <tr class="col-9">:  {{nameCustomer}} </tr>
 
             <td class="col-3">Nominal Loan</td>
             <!-- <tr class="col-1">:</tr> -->
-            <tr class="col-9">:  45.000.000 </tr>
+            <tr class="col-9">:  {{loanCredit}} </tr>
 
             <td class="col-3">Disbursement Status </td>
             <!-- <tr class="col-1">:</tr> -->
-            <tr class="col-9">: incomplete </tr>
+            <tr class="col-9">: {{disbursementStatus}} </tr>
 
             <td class="col-3">Tenor</td>
             <!-- <tr class="col-1">:</tr> -->
-            <tr class="col-9">:  6 Months</tr>
+            <tr class="col-9">:  {{tenor}} </tr>
         </div>
 
         <div >
@@ -50,7 +50,7 @@
         </div >
     </div>
       </div>
-      <a routerLink="/disbursement/transactions"><button class="btn btn-primary text-white m-5" > Back </button></a>
+      <a routerLink="/disbursement/list"><button class="btn btn-primary text-white m-5" > Back </button></a>
     </div>
   </div>
 

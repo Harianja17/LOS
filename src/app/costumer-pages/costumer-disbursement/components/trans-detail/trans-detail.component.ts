@@ -19,6 +19,10 @@ export class TransDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getDetails()
   }
+  nameCustomer:String ='';
+  loanCredit:String='';
+  disbursementStatus :String ='';
+  tenor:String='';
 
   getDetails(){
 
@@ -38,11 +42,11 @@ export class TransDetailComponent implements OnInit {
         })
        ).subscribe({
         next:({data})=>{
-          console.log('datanya : ',data);
-          console.log(data);
-      
-        this.transactionDetails=data.data;
-          
+          this.nameCustomer = data.fullName;
+          this.loanCredit = data.nominalLoan;
+          this.tenor = data.tenor;
+          this.disbursementStatus = data.disbursementStatus;
+          this.transactionDetails=data.data;
         }
         ,error:console.error,
        })
