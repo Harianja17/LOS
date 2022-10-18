@@ -49,10 +49,10 @@ export class TransactionDetailComponent implements OnInit {
         next:({data})=>{
           console.log('datanya : ',data);
           console.log(data);
-          this.nameCustomer = this.transactionService.nameCustomer;
-          this.loanCredit = this.transactionService.loanCredit;
-          this.tenor = this.transactionService.tenor;
-          this.disbursementStatus = this.transactionService.disbursementStatus;
+          this.nameCustomer = data.fullName;
+          this.loanCredit = data.nominalLoan;
+          this.tenor = data.tenor;
+          this.disbursementStatus = data.disbursementStatus;
           console.log('customer name: '+this.nameCustomer);
           
           

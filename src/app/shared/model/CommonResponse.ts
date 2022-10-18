@@ -6,5 +6,9 @@ export interface CommonResponse<T> {
 }
 export interface CommonResponseList<T>{
   message: string;
-  data: T[]
+  data: T[];
+  fullName:string;
+  nominalLoan:string;
+  disbursementStatus:string;
+  tenor:string;
 }

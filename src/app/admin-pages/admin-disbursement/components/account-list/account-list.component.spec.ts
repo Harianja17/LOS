@@ -11,8 +11,8 @@ describe('AccountListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccountListComponent ],
-      imports:[HttpClientTestingModule, RouterTestingModule, SearchPipe]
+      declarations: [ AccountListComponent, SearchPipe ],
+      imports:[HttpClientTestingModule, RouterTestingModule]
     })
     .compileComponents();
 

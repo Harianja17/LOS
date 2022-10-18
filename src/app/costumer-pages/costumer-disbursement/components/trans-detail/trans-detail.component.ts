@@ -40,7 +40,7 @@ export class TransDetailComponent implements OnInit {
         next:({data})=>{
           console.log('datanya : ',data);
           console.log(data);
-          
+      
         this.transactionDetails=data.data;
           
         }
