@@ -38,7 +38,7 @@
         </thead>
         <tbody *ngIf="isPresent; else no_data">
         <tr *ngFor="let data of transactions ; let i = index">
-          <td>{{(currentPaginate['page'] - 1) * paginate.size + (i+1)}}</td>
+          <td>{{(i+1)}}</td>
           <td>{{data.fullName}}</td>
           <td>{{data.installmentType}}</td>
           <td>{{data.trxDate | date: 'yyyy-MM-dd'}}</td>

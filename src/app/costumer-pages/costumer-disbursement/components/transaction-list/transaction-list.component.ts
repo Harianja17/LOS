@@ -99,5 +99,6 @@ setInstallment(event:any){
     await this.router.navigateByUrl(`/list?page=${this.currentPaginate['page']}&size=${this.currentPaginate['size']}`)
     this.getTransactions();
   }
+  searchText='';
 
 }

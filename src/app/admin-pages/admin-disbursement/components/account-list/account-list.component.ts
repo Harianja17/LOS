@@ -150,6 +150,7 @@ this.pageNumber-=1;
 
     this.loadAccounts();
   }
+  searchText='';
 
 
 }

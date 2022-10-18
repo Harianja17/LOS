@@ -14,6 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransactionListComponent } from './costumer-disbursement/components/transaction-list/transaction-list.component';
 import { TransDetailComponent } from './costumer-disbursement/components/trans-detail/trans-detail.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SearchPipe } from './costumer-disbursement/transaction-list/search.pipe';
+
 
 
 
@@ -27,7 +29,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CostumerSurveyComponent,
     CostumerDisbursementComponent,
     TransactionListComponent,
-    TransDetailComponent
+    TransDetailComponent,
+    SearchPipe
   ],
   imports: [
     CommonModule,

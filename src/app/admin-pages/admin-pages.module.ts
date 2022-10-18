@@ -16,6 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountListComponent } from './admin-disbursement/components/account-list/account-list.component';
 import { TransactionDetailComponent } from './admin-disbursement/components/transaction-detail/transaction-detail.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { SearchPipe } from './admin-disbursement/search/search.pipe';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
     DetailComponent,
     ComponentsComponent,
     AccountListComponent,
-    TransactionDetailComponent
+    TransactionDetailComponent,
+    SearchPipe
+   
   ],
   imports: [
     CommonModule,

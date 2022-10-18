@@ -93,7 +93,7 @@ setInstallment(event:any){
       focusConfirm: false,
       showLoaderOnConfirm: true}).then((result)=>{
         if(result.isConfirmed){
-          console.log(this.authService.getUserFromToken().subscribe((res)=>{
+          this.authService.getUserFromToken().subscribe((res)=>{
             let confirmAuth = {nik:res.data.nik,password:result.value}
             this.authService.login(confirmAuth).subscribe((res2)=>{
               if (confirmAuth.nik===res2.data.nik){
@@ -105,7 +105,7 @@ setInstallment(event:any){
               
             });
             
-          }));
+          })
           
           
         }
