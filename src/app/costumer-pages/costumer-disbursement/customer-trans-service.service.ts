@@ -16,8 +16,8 @@ export class ServiceService {
   constructor(private readonly http: HttpClient) { }
   accountList:Disbursement[]=[];
 
-  getAllTransactions(installment:string,nik:string):Observable<CommonResponse<PageResponse<TransactionResponse>>>{
-    return this.http.get<CommonResponse<PageResponse<TransactionResponse>>>(`/api/transactions/customer?installment=${installment}&nik=${nik}`)
+  getAllTransactions(installment:string,nik:string,page:number,size:number):Observable<CommonResponse<PageResponse<TransactionResponse>>>{
+    return this.http.get<CommonResponse<PageResponse<TransactionResponse>>>(`/api/transactions/customer?installment=${installment}&nik=${nik}&page=${page}&size=${size}`)
   }
 
   notify(): Observable<void> {

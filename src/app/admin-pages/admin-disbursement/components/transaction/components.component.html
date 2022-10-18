@@ -24,7 +24,6 @@
       </div>
     </div>
   
-    <ng-container *ngIf="transactions && paginate">
       <div class="table-responsive-md mx-3 bdr">
       <table class="table table-bordered" style="border-color: #f79323;">
         <thead>
@@ -39,7 +38,7 @@
           <th>Actions</th>
         </tr>
         </thead>
-        <tbody *ngIf="isPresent; else no_data">
+        <tbody >
         <tr *ngFor="let data of transactions | search:searchText; let i = index">
           <td>{{(i+1)}}</td>
           <td>{{data.fullName}}</td>
@@ -47,7 +46,7 @@
           <td>{{data.trxDate | date: 'yyyy-MM-dd'}}</td>
           <td>{{data.trxStatus}}</td>
           <td>{{data.disbursementDate | date: 'yyyy-MM-dd'}}</td>
-          <td>{{data.nominalLoan | currency:'IDR'}}</td>
+          <td> IDR {{data.nominalLoan}}</td>
           <td class="actions">
             <div class="d-flex justify-content-center">
               <div *ngIf="data.trxStatus==='APPROVED'; else not_disbursed">
@@ -68,24 +67,17 @@
         </td>
         </tr>
         </tbody>
-        <ng-template #no_data>
-          <h1>No Data Found</h1>
-        </ng-template>
         <tfoot>
           <tr style="background-color: #f1b16d; height: 33px;">
             <td colspan="12"></td>
           </tr>
         </tfoot>
       </table>
-      
-    </div>   
-     <pagination-controls
-        previousLabel="Prev"
-        nextLabel="Next"
-        (pageChange)="onTableDataChange($event)">
-      </pagination-controls> 
-    </ng-container>
-    <a routerLink="/disbursement/account-list"><button class="btn btn-primary text-white m-5" > Account List</button></a> 
+      <button class="btn btn-primary text-white me-2" (click)="onTableDataChangePrev()" *ngIf="page>0">Prev</button>
+    <button class="btn btn-primary text-white me-2" (click)="onTableDataChangeNext()" *ngIf="page<data.totalPages-1">Next</button>
+
+    <a routerLink="/disbursement/account-list"><button class="btn btn-secondary text-white " > Account List</button></a> 
+    </div>
   </div>
  
     </div>

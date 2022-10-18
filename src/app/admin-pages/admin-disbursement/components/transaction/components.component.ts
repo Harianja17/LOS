@@ -21,8 +21,8 @@ export class ComponentsComponent implements OnInit {
   paginate?: Omit<PageResponse<any>, "content">
   isPresent:boolean=true;
   data:any;
-  pageNumber :number =0;
-  totalPages: number = 0;
+
+  totalPages: number = 1;
   dataNotDelete:number=0;
   searchText='';
   constructor(private readonly route: ActivatedRoute,
@@ -31,9 +31,9 @@ export class ComponentsComponent implements OnInit {
     private readonly authService:AuthService) { }
 
   ngOnInit(): void {
-    this.transactionService.notify().subscribe(() => {
-      this.getTransactions();
-    })
+    // this.transactionService.notify().subscribe(() => {
+    //   this.getTransactions();
+    // })
     this.getTransactions()
   }
 
@@ -53,11 +53,12 @@ setInstallment(event:any){
   
 }
 
-
+page:number=0;
+size:number=5;
   getTransactions(){
     this.route.queryParamMap.pipe(
       switchMap((val)=>{
-        return this.transactionService.getAllTransactions(this.installment).pipe(map(({data})=>{
+        return this.transactionService.getAllTransactions(this.installment,this.page,this.size).pipe(map(({data})=>{
           console.log(this.installment);
           
           if(Object.getOwnPropertyNames(val).length!==0){
@@ -70,24 +71,22 @@ setInstallment(event:any){
       })
     ).subscribe({
       next: ({data})=>{
-        console.log(data);
-        // console.log('fullname'+data.data[0]);
-        
+        this.data=data
+        this.totalPages = data.totalPage
         this.transactions=data.data;
         this.paginate=data;
         
       },
-      error:console.error,
+      error:({})=>{
+
+        Swal.fire("No Data Found")
+      },
     })
   }
   moveToDetails(data : TransactionResponse){
     this.router.navigateByUrl("/disbursement/detail/"+data.trxId)
   }
-  async onTableDataChange(page: number) {
-    this.currentPaginate = {...this.currentPaginate, page: page}
-    await this.router.navigateByUrl(`/transactions?page=${this.currentPaginate['page']}&size=${this.currentPaginate['size']}`)
-    this.getTransactions();
-  }
+
 
   moveToForm(trans: TransactionResponse) {
     Swal.fire({
@@ -121,6 +120,18 @@ setInstallment(event:any){
         }
       })
 
+    }
+    onTableDataChange(){
+      this.page+=1;
+      this.getTransactions();
+    }
+    onTableDataChangeNext(){
+      this.page+=1;
+      this.getTransactions();
+    }
+    onTableDataChangePrev(){
+      this.page-=1;
+      this.getTransactions();
     }
 
 }

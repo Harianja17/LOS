@@ -21,6 +21,8 @@ export class TransactionListComponent implements OnInit {
   transactions: TransactionResponse[]=[];
   currentPaginate: { [key: string]: any } = {page: 1, size: 5};
   paginate?: Omit<PageResponse<any>, "content">
+  totalPages: number = 0;
+  data:any;
 
   constructor(private readonly route: ActivatedRoute,
     private readonly router: Router,
@@ -34,10 +36,6 @@ export class TransactionListComponent implements OnInit {
       console.log(this.nik);
       this.getTransactions();
     });
-    // this.transactionService.notify().subscribe(() => {
-    //   this.getTransactions();
-    // })
-   
     
   }
   statusClass(disbursementStatus: string): string {
@@ -61,13 +59,14 @@ setInstallment(event:any){
   this.getTransactions();
   
 }
-
+page:number=0;
+size:number=5;
   getTransactions(){
     this.route.queryParamMap.pipe(
       switchMap((val)=>{
         console.log(this.nik);
         
-        return this.transactionService.getAllTransactions(this.installment,this.nik).pipe(map(({data})=>{
+        return this.transactionService.getAllTransactions(this.installment,this.nik,this.page,this.size).pipe(map(({data})=>{
          console.log(data);
          
           
@@ -81,8 +80,8 @@ setInstallment(event:any){
       })
     ).subscribe({
       next: ({data})=>{
-        console.log(data);
-        // console.log('fullname'+data.data[0]);
+        this.data=data
+        this.totalPages = data.totalPage
         
         this.transactions=data.data;
         this.paginate=data;
@@ -94,11 +93,19 @@ setInstallment(event:any){
   moveToDetails(data : TransactionResponse){
     this.router.navigateByUrl("/disbursement/details/"+data.trxId)
   }
-  async onTableDataChange(page: number) {
-    this.currentPaginate = {...this.currentPaginate, page: page}
-    await this.router.navigateByUrl(`/list?page=${this.currentPaginate['page']}&size=${this.currentPaginate['size']}`)
+
+  searchText='';
+  onTableDataChange(){
+    this.page+=1;
     this.getTransactions();
   }
-  searchText='';
+  onTableDataChangeNext(){
+    this.page+=1;
+    this.getTransactions();
+  }
+  onTableDataChangePrev(){
+    this.page-=1;
+    this.getTransactions();
+  }
 
 }

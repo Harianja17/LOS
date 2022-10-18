@@ -32,7 +32,7 @@
             <td>{{data.installmentType}}</td>
             <td>{{data.trxStatus}}</td>
             <td>{{data.disbursementDate | date: 'yyyy-MM-dd'}}</td>
-            <td>{{data.nominalLoan}}</td>
+            <td> IDR {{data.nominalLoan}}</td>
             <td class="actions">
               <div class="d-flex justify-content-center">
                   <button type="button" class="btn btn-secondary text-white me-2" (click)="moveToDetails(data)">
@@ -49,12 +49,9 @@
         </tfoot>
       </table>
     </div>
-  
-      <pagination-controls
-        previousLabel="Prev"
-        nextLabel="Next"
-        (pageChange)="onTableDataChange($event)">
-      </pagination-controls> 
+    <button class="btn btn-primary text-white m-2" (click)="onTableDataChangePrev()" *ngIf="page>0">Prev</button>
+    <button class="btn btn-primary text-white m-2" (click)="onTableDataChangeNext()" *ngIf="page<data.totalPages-1">Next</button> 
+     
      </ng-container>
   </div>
     </div>

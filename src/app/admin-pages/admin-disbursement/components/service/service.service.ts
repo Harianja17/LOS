@@ -20,16 +20,9 @@ export class ServiceService {
    disbursementStatus :String ='';
    tenor:String=''
 
-  getAllTransactions(params:any):Observable<CommonResponse<PageResponse<TransactionResponse>>>{
-    console.log(params);
-    
-    let reqParams : any={};
-    if (params){
-      Object.keys(params).map(k=>{
-        reqParams[k]=params[k];
-      })
-    }
-    return this.http.get<CommonResponse<PageResponse<TransactionResponse>>>(`/api/transactions/?installment=${params}`)
+  getAllTransactions(params:any,page:any,size:any):Observable<CommonResponse<PageResponse<TransactionResponse>>>{
+
+    return this.http.get<CommonResponse<PageResponse<TransactionResponse>>>(`/api/transactions/?installment=${params}&page=${page}&size=${size}`)
   }
   notify(): Observable<void> {
     return this.transactionSubject.asObservable()
