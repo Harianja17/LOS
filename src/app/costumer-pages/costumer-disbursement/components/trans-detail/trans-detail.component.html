@@ -12,7 +12,7 @@
             <tr class="col-9">:  {{nameCustomer}} </tr>
 
             <td class="col-3">Nominal Loan</td>
-            <tr class="col-9">:  {{loanCredit}} </tr>
+            <tr class="col-9">: IDR {{loanCredit}} </tr>
 
             <td class="col-3">Disbursement Status </td>
             <tr class="col-9">: {{disbursementStatus}} </tr>
@@ -37,7 +37,7 @@
                 <tr *ngFor="let data of transactionDetails ; let i = index">
                   <td>{{i+1}}</td>
                   <td>{{data.installmentDate| date:'yyyy-MM-dd'}}</td>
-                  <td>{{data.installmentTotal}}</td>
+                  <td>{{data.installmentTotal | currency:'IDR'}}</td>
                   <td> {{data.disburtmentStatus}} </td>
                 
                 </tr>

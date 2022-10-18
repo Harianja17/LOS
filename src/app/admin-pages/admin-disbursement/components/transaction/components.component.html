@@ -47,7 +47,7 @@
           <td>{{data.trxDate | date: 'yyyy-MM-dd'}}</td>
           <td>{{data.trxStatus}}</td>
           <td>{{data.disbursementDate | date: 'yyyy-MM-dd'}}</td>
-          <td>{{data.nominalLoan}}</td>
+          <td>{{data.nominalLoan | currency:'IDR'}}</td>
           <td class="actions">
             <div class="d-flex justify-content-center">
               <div *ngIf="data.trxStatus==='APPROVED'; else not_disbursed">
