@@ -1,7 +1,7 @@
 export interface PageResponse<T> {
   data: T[];
   count: number;
-  totalPage: number;
+  totalPages: number;
   page: number;
   size: number;
 }

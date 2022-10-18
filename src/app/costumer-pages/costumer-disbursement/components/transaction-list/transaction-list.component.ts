@@ -22,7 +22,13 @@ export class TransactionListComponent implements OnInit {
   currentPaginate: { [key: string]: any } = {page: 1, size: 5};
   paginate?: Omit<PageResponse<any>, "content">
   totalPages: number = 0;
-  data:any;
+  data:PageResponse<TransactionResponse>={
+    totalPages:0,
+    size:0,
+    page:0,
+    count:0,
+    data:[]
+  };
 
   constructor(private readonly route: ActivatedRoute,
     private readonly router: Router,
@@ -81,7 +87,7 @@ size:number=5;
     ).subscribe({
       next: ({data})=>{
         this.data=data
-        this.totalPages = data.totalPage
+        this.totalPages = data.totalPages
         
         this.transactions=data.data;
         this.paginate=data;

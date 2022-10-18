@@ -6,6 +6,7 @@ import { map, switchMap } from 'rxjs';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { PageResponse } from 'src/app/shared/model/PageResponse';
+import { TransactionResponse } from 'src/app/shared/model/transaction.model';
 @Component({
   selector: 'app-account-list',
   templateUrl: './account-list.component.html',
@@ -15,7 +16,13 @@ export class AccountListComponent implements OnInit {
 
   constructor(private readonly service:ServiceService,private readonly route: ActivatedRoute, private readonly router: Router) { }
   disbursementList:DisbursementResponseDTO[] = []
-  data:any;
+  data:PageResponse<DisbursementResponseDTO>={
+    totalPages:0,
+    size:0,
+    page:0,
+    count:0,
+    data:[]
+  };
   pageNumber :number =0;
   totalPages: number = 0;
   dataNotDelete:number=0;
@@ -30,23 +37,11 @@ export class AccountListComponent implements OnInit {
     { name: "10", value: 10 },
     { name: "20", value: 20 },
   ]
-  currentPaginate: { [key: string]: any } = {page: 1, size: 5};
-
-
+  
   loadAccounts(){
-    this.route.queryParamMap.pipe(
-      switchMap((val)=>{
-        return this.service.getDisbursements(this.selectedOption,this.pageNumber).pipe(map(({data})=>{
-          if(Object.getOwnPropertyNames(val).length!==0){
-            return {params:val, data:data};
-          }else{
-            return {params:{page: 1, size: 5, direction: 'Desc'}, data:data};
-          }
-        }))
-      })
-    ).subscribe({
+   this.service.getDisbursements(this.selectedOption,this.pageNumber).subscribe({
       next: ({data})=>{
-        this.totalPages = data.totalPage
+        this.totalPages = data.totalPages
         this.data = data;
         this.disbursementList = data.data;  
         for(let i=0;i<this.disbursementList.length;i++){

@@ -28,19 +28,7 @@ export class TransDetailComponent implements OnInit {
 
     this.route.params.subscribe((params) => {
       if (params && params['id']) {
-       this.route.queryParamMap.pipe(
-        switchMap((val)=>{
-          return this.transactionService.getTransactiondetail(params['id']).pipe(map(({data})=>{
-            if(Object.getOwnPropertyNames(val).length!==0){
-              return {params:val,data:data};
-            }
-            else{
-              return{params:{page:1,size:5,direction:'Desc'},data:data};
-            }
-          }))
-          
-        })
-       ).subscribe({
+          this.transactionService.getTransactiondetail(params['id']).subscribe({
         next:({data})=>{
           this.nameCustomer = data.fullName;
           this.loanCredit = data.nominalLoan;

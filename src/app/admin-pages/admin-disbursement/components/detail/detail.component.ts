@@ -54,11 +54,6 @@ export class DetailComponent implements OnInit {
   getDisbursementData(){
     this.route.params.subscribe((params) => {
       if (params && params['id']) {
-        this.isUpdateButton = true;
-        // this.transactionService.getDisbursementById(params['id']).subscribe((response) => {
-        //   this.setDisbursementData(response.data);
-        // })
-
         this.route.queryParamMap.pipe(
           switchMap((val)=>{
             return this.transactionService.getDisbursementById(params['id']).pipe(map(({data})=>{
@@ -75,10 +70,6 @@ export class DetailComponent implements OnInit {
             // console.log('fullname'+data.data[0]);
             this.disbursementData = data;
             this.setDisbursementData(this.disbursementData);
-           
-            // this.transactions=data.data;
-            // this.paginate=data;
-            
           },
           error:console.error,
         })
@@ -105,18 +96,7 @@ console.log('method');
         
         this.isUpdateButton = true;
         if(this.disbursementData.disbursementId){
-        this.route.queryParamMap.pipe(
-          switchMap((val)=>{
-            console.log("DATA:" + this.disbursementData);
-            return this.transactionService.updateDisbursement(this.disbursementData).pipe(map(({data})=>{
-              if(Object.getOwnPropertyNames(val).length!==0){
-                return {params:val, data:data};
-              }else{
-                return {params:{page: 1, size: 5, direction: 'Desc'}, data:data};
-              }
-            }))
-          })
-        ).subscribe({
+       this.transactionService.updateDisbursement(this.disbursementData).subscribe({
           next: ({data})=>{
             console.log(data);
         this.getDisbursementData();
@@ -161,11 +141,7 @@ console.log('method');
     this.disbursementForm.controls['customerAccountName'].setValue(data.customerAccountName)
     this.disbursementForm.controls['customerAccountNumber'].setValue(data.customerAccountNumber)
   }
-  // submitData(data:any){
-  //   this.disbursementData.push(data);
-  //   console.log(this.disbursementData);
-    
-  // }
+
 
   getDetail(){
     console.log(this.disbursementData);
@@ -177,39 +153,6 @@ console.log('method');
   clearForm(){
     this.disbursementForm.reset();
   }
-  onApproved(trans:TransactionResponse) {
-    console.log(trans);
-
-    
-    Swal.fire({
-      title: 'Confirm Password',
-      input: 'password',
-      confirmButtonText: 'Submit',
-      focusConfirm: false,
-      showLoaderOnConfirm: true,
-      preConfirm: (password) => {
-        if (password=='') {
-          Swal.showValidationMessage(`Please enter verification password`)
-        }
-        else {
-          let a = password
-          if(a==='12345'){
-            console.log(trans);
-            
-              this.transactionService.approved(trans.trxId).subscribe((val)=>{
-                console.log(val.data.trxId);
-                
-              })
-              
-              
-        
-          }else{
-            Swal.showValidationMessage(`Password Incorrect`)
-          }
-          
-        }
-      }
-    })
-  }
+  
 
 }

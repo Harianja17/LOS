@@ -20,10 +20,6 @@ export class ComponentsComponent implements OnInit {
   currentPaginate: { [key: string]: any } = {page: 1, size: 5};
   paginate?: Omit<PageResponse<any>, "content">
   isPresent:boolean=true;
-  data:any;
-
-  totalPages: number = 1;
-  dataNotDelete:number=0;
   searchText='';
   constructor(private readonly route: ActivatedRoute,
     private readonly router: Router,
@@ -31,9 +27,9 @@ export class ComponentsComponent implements OnInit {
     private readonly authService:AuthService) { }
 
   ngOnInit(): void {
-    // this.transactionService.notify().subscribe(() => {
-    //   this.getTransactions();
-    // })
+    this.transactionService.notify().subscribe(() => {
+      this.getTransactions();
+    })
     this.getTransactions()
   }
 
@@ -55,38 +51,32 @@ setInstallment(event:any){
 
 page:number=0;
 size:number=5;
+data:PageResponse<TransactionResponse>={
+  totalPages:0,
+  size:0,
+  page:0,
+  count:0,
+  data:[]
+};
+totalPages:number=0;
   getTransactions(){
-    this.route.queryParamMap.pipe(
-      switchMap((val)=>{
-        return this.transactionService.getAllTransactions(this.installment,this.page,this.size).pipe(map(({data})=>{
-          console.log(this.installment);
-          
-          if(Object.getOwnPropertyNames(val).length!==0){
-            return {params:val, data:data};
-          }else{
-            this.isPresent=false;
-            return {params:{page: 1, size: 5, direction: 'Desc'}, data:data};
-          }
-        }))
-      })
-    ).subscribe({
+  
+    this.transactionService.getAllTransactions(this.installment,this.page,this.size).subscribe({
       next: ({data})=>{
-        this.data=data
-        this.totalPages = data.totalPage
+        this.totalPages = data.totalPages
+        this.data = data;
         this.transactions=data.data;
-        this.paginate=data;
+      
         
       },
-      error:({})=>{
-
-        Swal.fire("No Data Found")
-      },
+      error:console.error,
     })
   }
+  
   moveToDetails(data : TransactionResponse){
     this.router.navigateByUrl("/disbursement/detail/"+data.trxId)
   }
-
+ 
 
   moveToForm(trans: TransactionResponse) {
     Swal.fire({
@@ -99,39 +89,37 @@ size:number=5;
         if(result.isConfirmed){
           this.authService.getUserFromToken().subscribe((res)=>{
             let confirmAuth = {nik:res.data.nik,password:result.value}
-            this.authService.login(confirmAuth).subscribe({
-              next:({res2})=>{
-                    if (confirmAuth.nik===res2.data.nik){
-                    this.transactionService.approved(trans.trxId).subscribe((val)=>{
-                    this.transactionService.getDisbursementByTrxID(trans.trxId).subscribe((val)=>{
+            this.authService.login(confirmAuth).subscribe((res2)=>{
+              if (confirmAuth.nik===res2.data.nik){
+                this.transactionService.approved(trans.trxId).subscribe(()=>{})
+                  this.transactionService.getDisbursementByTrxID(trans.trxId).subscribe((val)=>{
                     this.router.navigateByUrl('disbursement/disbursement-form/'+val.data.disbursementId); 
                   })
                             
-                  })
+                  
+              }else{
+                Swal.fire("Invalid Authentication")
               }
-              },error:({})=>{
-                Swal.fire('Invalid Authentication')
-              }
-            }
-            );
+              
+              
+            });
             
           })
           
         }
       })
 
-    }
-    onTableDataChange(){
-      this.page+=1;
-      this.getTransactions();
-    }
-    onTableDataChangeNext(){
-      this.page+=1;
-      this.getTransactions();
-    }
-    onTableDataChangePrev(){
-      this.page-=1;
-      this.getTransactions();
-    }
-
+}
+onTableDataChange(){
+  this.page+=1;
+  this.getTransactions();
+}
+onTableDataChangeNext(){
+  this.page+=1;
+  this.getTransactions();
+}
+onTableDataChangePrev(){
+  this.page-=1;
+  this.getTransactions();
+}
 }
