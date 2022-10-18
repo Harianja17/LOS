@@ -31,12 +31,6 @@ export class ServiceService {
     }
     return this.http.get<CommonResponse<PageResponse<TransactionResponse>>>(`/api/transactions/?installment=${params}`)
   }
-
-  
- 
-
-
-
   notify(): Observable<void> {
     return this.transactionSubject.asObservable()
   }
@@ -48,26 +42,9 @@ export class ServiceService {
     return this.http.get<CommonResponse<CommonResponseList<TransactionDetailResponse>>>('/api/transaction-details/'+id);
   }
 
-  createDisbursement(data:Disbursement):Observable<CommonResponse<Disbursement>>{
-    return this.http.post<CommonResponse<Disbursement>>('api/disbursements',data)
-  }
-  updateTransactions(transaction: TransactionResponse): Observable<CommonResponse<PageResponse<TransactionResponse>>> {
-    return this.http.put<CommonResponse<PageResponse<TransactionResponse>>>('api/transactions', transaction)
-  }
-  public getDisbursements(option:String,page:number): Observable<CommonResponse<PageResponse<DisbursementResponseDTO>>>{
-    let reqParams: any = {};
 
-    // if (params){
-    //   Object.keys(params).map(k => {
-    //     reqParams[k] = params[k];
-    //   })
-    // }
-    console.log(option);
-    console.log('page to string : '+page.toString());
-    
-    
+  public getDisbursements(option:String,page:number): Observable<CommonResponse<PageResponse<DisbursementResponseDTO>>>{
     return this.http.get<CommonResponse<PageResponse<DisbursementResponseDTO>>>('/api/disbursements?size='+option+'&page='+page.toString());
-    // return this.http.get<Product[]>('/api/products', {headers: this.getToken()});
   }
   
   getDisbursementById(id: string): Observable<CommonResponse<Disbursement>>{
@@ -81,12 +58,7 @@ export class ServiceService {
   }
   
   updateDisbursement(disburse: Disbursement): Observable<CommonResponse<Disbursement>> {
-   console.log('service');
-  //  if(disburse.disbursementId) 
-   
-   console.log('disbursement id : '+disburse.disbursementId);
-   console.log("name account : "+disburse.customerAccountName);
-   
+
     return this.http.put<CommonResponse<Disbursement>>('api/disbursements', disburse)
   }
 
