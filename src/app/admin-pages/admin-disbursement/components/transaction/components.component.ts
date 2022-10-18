@@ -20,6 +20,7 @@ export class ComponentsComponent implements OnInit {
   currentPaginate: { [key: string]: any } = {page: 1, size: 5};
   paginate?: Omit<PageResponse<any>, "content">
   isPresent:boolean=true;
+  searchText='';
   constructor(private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly transactionService:ServiceService,

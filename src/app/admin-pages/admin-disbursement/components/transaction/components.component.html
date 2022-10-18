@@ -5,7 +5,10 @@
       <div class="card-header bg-white p-4">
     <h2>Loan Transaction List</h2>
     <div class="card-body d-flex">
-      <div class="col-md-12">
+      <div class="col-md-4 ms-auto">
+        <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchText">
+      </div>
+      <div class="col-md-8">
         <div class="col-md-4 ms-auto">
           <div class="input-group">
             <div class="mb-2">
@@ -37,7 +40,7 @@
         </tr>
         </thead>
         <tbody *ngIf="isPresent; else no_data">
-        <tr *ngFor="let data of transactions ; let i = index">
+        <tr *ngFor="let data of transactions | search:searchText; let i = index">
           <td>{{(i+1)}}</td>
           <td>{{data.fullName}}</td>
           <td>{{data.installmentType}}</td>
