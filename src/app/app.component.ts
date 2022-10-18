@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'shared-component-final-project';
+  title:string = 'shared-component-final-project';
 }

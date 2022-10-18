@@ -25,32 +25,6 @@ export class TransactionDetailComponent implements OnInit {
     this.getDetails()
   }
 
-  // getTransactions(){
-  //   this.route.queryParamMap.pipe(
-  //     switchMap((val)=>{
-  //       return this.transactionService.getAllTransactions(this.installment).pipe(map(({data})=>{
-  //         console.log(this.installment);
-          
-  //         if(Object.getOwnPropertyNames(val).length!==0){
-  //           return {params:val, data:data};
-  //         }else{
-  //           this.isPresent=false;
-  //           return {params:{page: 1, size: 5, direction: 'Desc'}, data:data};
-  //         }
-  //       }))
-  //     })
-  //   ).subscribe({
-  //     next: ({data})=>{
-  //       console.log(data);
-  //       // console.log('fullname'+data.data[0]);
-        
-  //       this.transactions=data.data;
-  //       this.paginate=data;
-        
-  //     },
-  //     error:console.error,
-  //   })
-  // }
 
 
   getDetails(){    
