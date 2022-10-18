@@ -20,6 +20,10 @@ export class ComponentsComponent implements OnInit {
   currentPaginate: { [key: string]: any } = {page: 1, size: 5};
   paginate?: Omit<PageResponse<any>, "content">
   isPresent:boolean=true;
+  data:any;
+  pageNumber :number =0;
+  totalPages: number = 0;
+  dataNotDelete:number=0;
   searchText='';
   constructor(private readonly route: ActivatedRoute,
     private readonly router: Router,
@@ -96,23 +100,27 @@ setInstallment(event:any){
         if(result.isConfirmed){
           this.authService.getUserFromToken().subscribe((res)=>{
             let confirmAuth = {nik:res.data.nik,password:result.value}
-            this.authService.login(confirmAuth).subscribe((res2)=>{
-              if (confirmAuth.nik===res2.data.nik){
-                this.transactionService.approved(trans.trxId).subscribe((val)=>{
-                  this.transactionService.getDisbursementByTrxID(trans.trxId).subscribe((val)=>{
+            this.authService.login(confirmAuth).subscribe({
+              next:({res2})=>{
+                    if (confirmAuth.nik===res2.data.nik){
+                    this.transactionService.approved(trans.trxId).subscribe((val)=>{
+                    this.transactionService.getDisbursementByTrxID(trans.trxId).subscribe((val)=>{
                     this.router.navigateByUrl('disbursement/disbursement-form/'+val.data.disbursementId); 
                   })
                             
                   })
               }
-              
-              
-            });
+              },error:({})=>{
+                Swal.fire('Invalid Authentication')
+              }
+            }
+            );
             
           })
           
         }
       })
 
-}
+    }
+
 }

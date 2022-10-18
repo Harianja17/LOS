@@ -15,18 +15,12 @@ export class AccountListComponent implements OnInit {
 
   constructor(private readonly service:ServiceService,private readonly route: ActivatedRoute, private readonly router: Router) { }
   disbursementList:DisbursementResponseDTO[] = []
-data:any;
-  // disbursementData:DisbursementResponseDTO={ disbursementId: '',
-  
-  //   customerBank: '',
-  //   customerAccountName: '',
-  //   customerAccountNumber: '',
-  // isDelete:false};
-  
+  data:any;
   pageNumber :number =0;
   totalPages: number = 0;
   dataNotDelete:number=0;
-    ngOnInit(): void {
+  
+  ngOnInit(): void {
     this.loadAccounts();
   }
   pageTitle:string='Disbursement';
@@ -52,25 +46,18 @@ data:any;
       })
     ).subscribe({
       next: ({data})=>{
-        console.log(data);
-        // console.log('fullname'+data.data[0]);
         this.totalPages = data.totalPage
         this.data = data;
         this.disbursementList = data.data;  
-        console.log('LIST: '+this.disbursementList);
         for(let i=0;i<this.disbursementList.length;i++){
-this.dataNotDelete+=1;
+        this.dataNotDelete+=1;
         }
-        // this.paginate=data;
-        
       },
       error:console.error,
     })
   }
 
   moveToForm(id: DisbursementResponseDTO) {
- //   console.log('id : '+id.id);
-    
     this.router.navigateByUrl('/disbursement/disbursement-form/' + id.disbursementId)
   }
 
@@ -87,7 +74,6 @@ this.dataNotDelete+=1;
         Swal.fire(
           'The disbursement has been deleted.',
         );
-        console.log('disburseId1: '+disbursement.disbursementId);
         this.route.params.subscribe((params) => {
           if (disbursement && disbursement.disbursementId) {
             
@@ -103,53 +89,28 @@ this.dataNotDelete+=1;
               })
             ).subscribe({
               next: ({data})=>{                
-                console.log(data);
-            this.loadAccounts();
-            // this.router.navigateByUrl('/disbursement/account-list');
-                // this.paginate=data;
-                
+                this.loadAccounts();
               },
               error:console.error,
             })
     
           }
         })
-        // this.service.deleteDisbursement(this.disbursementData).subscribe({
-        //   next: (res) => this.loadAccounts(),
-        //   error: (err) => alert(err.error.message)
-        // })
+  
       }
     })
   }
 
   onTableDataChange(){
-    // console.log('PAGE: '+page);
-    // this.currentPaginate = {...this.currentPaginate, page: page}
-    // this.router.navigateByUrl(`/disbursement/account-list?page=${this.currentPaginate['page']}&size=${this.currentPaginate['size']}`)
-    // // this.service.getDisbursements(page)
-this.pageNumber+=1;
-
-
+    this.pageNumber+=1;
     this.loadAccounts();
   }
   onTableDataChangeNext(){
-    // console.log('PAGE: '+page);
-    // this.currentPaginate = {...this.currentPaginate, page: page}
-    // this.router.navigateByUrl(`/disbursement/account-list?page=${this.currentPaginate['page']}&size=${this.currentPaginate['size']}`)
-    // // this.service.getDisbursements(page)
-this.pageNumber+=1;
-
-
+    this.pageNumber+=1;
     this.loadAccounts();
   }
   onTableDataChangePrev(){
-    // console.log('PAGE: '+page);
-    // this.currentPaginate = {...this.currentPaginate, page: page}
-    // this.router.navigateByUrl(`/disbursement/account-list?page=${this.currentPaginate['page']}&size=${this.currentPaginate['size']}`)
-    // // this.service.getDisbursements(page)
-this.pageNumber-=1;
-
-
+    this.pageNumber-=1;
     this.loadAccounts();
   }
   searchText='';

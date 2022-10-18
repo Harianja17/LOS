@@ -23,7 +23,6 @@
       </div>
     </div>
   
-    <!-- <ng-container *ngIf="transactions && paginate"> -->
       <div class="table-responsive-md mx-3 bdr" >
       <table class="table table-bordered" style="border-color: #f79323;">
         <thead>
@@ -37,7 +36,6 @@
         </thead>
         <tbody>
         <tr *ngFor="let data of disbursementList | search:searchText; let i = index ">
-          <!-- <td>{{(currentPaginate['page'] - 1) * paginate.size + (i + 1)}}</td> -->
         
           <td>{{i+1}}</td>
           <td>{{data.customerBank}}</td>
@@ -64,15 +62,11 @@
         </tfoot>
       </table>
     </div>
-    <!-- <pagination-controls
-    previousLabel="Prev"
-    nextLabel="Next"
-    (pageChange)="onTableDataChange()" (pageBoundsCorrection)="onTableDataChange()" >
-  </pagination-controls>  -->
+
   <button class="btn btn-primary text-white m-2" (click)="onTableDataChangePrev()" *ngIf="pageNumber>0">Prev</button>
   <button class="btn btn-primary text-white m-2" (click)="onTableDataChangeNext()" *ngIf="pageNumber<data.totalPages-1">Next</button>
   
-    <!-- </ng-container> -->
+
   </div>
     </div>
   </div>
