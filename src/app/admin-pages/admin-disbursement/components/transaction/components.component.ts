@@ -72,7 +72,9 @@ isStaff:boolean=true;
         this.transactions=data.data;
         this.isSearch=true
       },
-      error:console.error,
+      error:()=>{
+        Swal.fire("No Data Found")
+      },
     })
   }
   
