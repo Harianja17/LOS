@@ -31,6 +31,7 @@ export class ComponentsComponent implements OnInit {
       this.getTransactions();
     })
     this.getTransactions()
+    
   }
 
   items = [
@@ -58,6 +59,7 @@ data:PageResponse<TransactionResponse>={
   count:0,
   data:[]
 };
+isSearch:boolean=true;
 totalPages:number=0;
   getTransactions(){
   
@@ -66,6 +68,7 @@ totalPages:number=0;
         this.totalPages = data.totalPages
         this.data = data;
         this.transactions=data.data;
+        this.isSearch=true
       
         
       },
@@ -77,8 +80,9 @@ totalPages:number=0;
     this.router.navigateByUrl("/disbursement/detail/"+data.trxId)
   }
  
-
+  authNik:string=''
   moveToForm(trans: TransactionResponse) {
+    this.isSearch=false;
     Swal.fire({
       title: 'Confirm Password',
       input: 'password',
@@ -89,20 +93,43 @@ totalPages:number=0;
         if(result.isConfirmed){
           this.authService.getUserFromToken().subscribe((res)=>{
             let confirmAuth = {nik:res.data.nik,password:result.value}
-            this.authService.login(confirmAuth).subscribe((res2)=>{
-              if (confirmAuth.nik===res2.data.nik){
-                this.transactionService.approved(trans.trxId).subscribe(()=>{})
-                  this.transactionService.getDisbursementByTrxID(trans.trxId).subscribe((val)=>{
+            this.authNik=res.data.nik
+            this.authService.login(confirmAuth).subscribe({
+              next:({res2})=>{
+                if (confirmAuth.nik===this.authNik){
+                    this.transactionService.approved(trans.trxId).subscribe(()=>{
+                    this.transactionService.getDisbursementByTrxID(trans.trxId).subscribe((val)=>{
+      
                     this.router.navigateByUrl('disbursement/disbursement-form/'+val.data.disbursementId); 
                   })
+                })
+                  
                             
                   
-              }else{
-                Swal.fire("Invalid Authentication")
               }
+              },
+              error:({})=>{
+                Swal.fire('Failed Authentication')
+                this.getTransactions()
+              }
+            }
+              
+            //   (res2)=>{
+            //   if (confirmAuth.nik===res2.data.nik){
+            //     this.transactionService.approved(trans.trxId).subscribe(()=>{
+            //       this.transactionService.getDisbursementByTrxID(trans.trxId).subscribe((val)=>{
+      
+            //         this.router.navigateByUrl('disbursement/disbursement-form/'+val.data.disbursementId); 
+            //       })
+            //     })
+                  
+                            
+                  
+            //   }
               
               
-            });
+            // }
+            );
             
           })
           
