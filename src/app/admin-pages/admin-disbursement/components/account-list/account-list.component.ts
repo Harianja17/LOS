@@ -7,6 +7,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { PageResponse } from 'src/app/shared/model/PageResponse';
 import { TransactionResponse } from 'src/app/shared/model/transaction.model';
+import { AuthService } from 'src/app/auth/service/auth.service';
 @Component({
   selector: 'app-account-list',
   templateUrl: './account-list.component.html',
@@ -14,7 +15,8 @@ import { TransactionResponse } from 'src/app/shared/model/transaction.model';
 })
 export class AccountListComponent implements OnInit {
 
-  constructor(private readonly service:ServiceService,private readonly route: ActivatedRoute, private readonly router: Router) { }
+  constructor(private readonly service:ServiceService,private readonly route: ActivatedRoute, private readonly router: Router,
+    private readonly authService:AuthService) { }
   disbursementList:DisbursementResponseDTO[] = []
   data:PageResponse<DisbursementResponseDTO>={
     totalPages:0,
@@ -29,6 +31,7 @@ export class AccountListComponent implements OnInit {
   
   ngOnInit(): void {
     this.loadAccounts();
+    this.changeRole();
   }
   pageTitle:string='Disbursement';
   selectedOption: string='5';
@@ -52,6 +55,17 @@ export class AccountListComponent implements OnInit {
     })
   }
 
+  isStaff:boolean=true;
+  role:string=''
+  changeRole(){
+    this.authService.getUserFromToken().subscribe((val)=>{
+      this.role= val.data.roleList[0];
+      if(this.role !== 'ROLE_STAFF'){
+        this.isStaff=false;
+      }
+    })
+  }
+
   moveToForm(id: DisbursementResponseDTO) {
     this.router.navigateByUrl('/disbursement/disbursement-form/' + id.disbursementId)
   }
@@ -71,18 +85,7 @@ export class AccountListComponent implements OnInit {
         );
         this.route.params.subscribe((params) => {
           if (disbursement && disbursement.disbursementId) {
-            
-            this.route.queryParamMap.pipe(
-               switchMap((val)=>{
-                return this.service.deleteDisbursement(disbursement).pipe(map(({data})=>{
-                  if(Object.getOwnPropertyNames(val).length!==0){
-                    return {params:val, data:data};
-                  }else{
-                    return {params:{page: 1, size: 5, direction: 'Desc'}, data:data};
-                  }
-                }))
-              })
-            ).subscribe({
+            this.service.deleteDisbursement(disbursement).subscribe({
               next: ({data})=>{                
                 this.loadAccounts();
               },

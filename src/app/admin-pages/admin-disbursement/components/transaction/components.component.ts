@@ -31,6 +31,7 @@ export class ComponentsComponent implements OnInit {
       this.getTransactions();
     })
     this.getTransactions()
+    this.changeRole()
     
   }
 
@@ -61,16 +62,15 @@ data:PageResponse<TransactionResponse>={
 };
 isSearch:boolean=true;
 totalPages:number=0;
+isStaff:boolean=true;
+
   getTransactions(){
-  
     this.transactionService.getAllTransactions(this.installment,this.page,this.size).subscribe({
       next: ({data})=>{
         this.totalPages = data.totalPages
         this.data = data;
         this.transactions=data.data;
         this.isSearch=true
-      
-        
       },
       error:console.error,
     })
@@ -78,6 +78,18 @@ totalPages:number=0;
   
   moveToDetails(data : TransactionResponse){
     this.router.navigateByUrl("/disbursement/detail/"+data.trxId)
+  }
+
+
+
+  role:string=''
+  changeRole(){
+    this.authService.getUserFromToken().subscribe((val)=>{
+      this.role= val.data.roleList[0];
+      if(this.role !== 'ROLE_STAFF'){
+        this.isStaff=false;
+      }
+    })
   }
  
   authNik:string=''
@@ -113,22 +125,6 @@ totalPages:number=0;
                 this.getTransactions()
               }
             }
-              
-            //   (res2)=>{
-            //   if (confirmAuth.nik===res2.data.nik){
-            //     this.transactionService.approved(trans.trxId).subscribe(()=>{
-            //       this.transactionService.getDisbursementByTrxID(trans.trxId).subscribe((val)=>{
-      
-            //         this.router.navigateByUrl('disbursement/disbursement-form/'+val.data.disbursementId); 
-            //       })
-            //     })
-                  
-                            
-                  
-            //   }
-              
-              
-            // }
             );
             
           })

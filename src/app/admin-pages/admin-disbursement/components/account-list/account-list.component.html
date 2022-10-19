@@ -3,7 +3,7 @@
   <div class="container px-5">
     <div class="card">
       <div class="card-header bg-white p-4">
-    <h2>Loan Transaction List</h2>
+    <h2>Account List</h2>
     <div class="card-body d-flex">
         <div class="col-md-4 ms-auto">
           <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchText">
@@ -22,52 +22,85 @@
         </div>
       </div>
     </div>
-  
+    <div *ngIf="isStaff; else not_staff">
       <div class="table-responsive-md mx-3 bdr" >
-      <table class="table table-bordered" style="border-color: #f79323;">
-        <thead>
-        <tr>
-          <th>No</th>
-          <th>Bank</th>
-          <th>Account Name</th>
-          <th>Account Number</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let data of disbursementList | search:searchText; let i = index ">
-        
-          <td>{{i+1}}</td>
-          <td>{{data.customerBank}}</td>
-          <td>{{data.customerAccountName}}</td>
-          <td>{{data.customerAccountNumber}}</td>
-          <td class="actions">
-            <div class="d-flex justify-content-center">
-                <button type="button"(click)="moveToForm(data)" class="btn btn-primary text-white me-2" >
-                    Update
-                    
-                  </button>
-                  <button type="button" (click)="deleteDisbursement(data)" class="btn btn-secondary text-white me-2">
-                    Delete
-                  </button>
-            </div>
-        </td>
-      
-        </tr>
-        </tbody>
-        <tfoot>
-          <tr style="background-color: #f1b16d; height: 33px;">
-            <td colspan="12"></td>
+        <table class="table table-bordered" style="border-color: #f79323;">
+          <thead>
+          <tr>
+            <th>No</th>
+            <th>Bank</th>
+            <th>Account Name</th>
+            <th>Account Number</th>
+            <th>Actions</th>
           </tr>
-        </tfoot>
-      </table>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of disbursementList | search:searchText; let i = index ">
+          
+            <td>{{i+1}}</td>
+            <td>{{data.customerBank}}</td>
+            <td>{{data.customerAccountName}}</td>
+            <td>{{data.customerAccountNumber}}</td>
+            <td class="actions">
+              <div class="d-flex justify-content-center">
+                  <button type="button"(click)="moveToForm(data)" class="btn btn-primary text-white me-2" >
+                      Update
+                      
+                    </button>
+                    <button type="button" (click)="deleteDisbursement(data)" class="btn btn-secondary text-white me-2">
+                      Delete
+                    </button>
+              </div>
+          </td>
+        
+          </tr>
+          </tbody>
+          <tfoot>
+            <tr style="background-color: #f1b16d; height: 33px;">
+              <td colspan="12"></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
+      <ng-template #not_staff>
+        <div class="table-responsive-md mx-3 bdr" >
+          <table class="table table-bordered" style="border-color: #f79323;">
+            <thead>
+            <tr>
+              <th>No</th>
+              <th>Bank</th>
+              <th>Account Name</th>
+              <th>Account Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of disbursementList | search:searchText; let i = index ">
+            
+              <td>{{i+1}}</td>
+              <td>{{data.customerBank}}</td>
+              <td>{{data.customerAccountName}}</td>
+              <td>{{data.customerAccountNumber}}</td>
+          
+            </tr>
+            </tbody>
+            <tfoot>
+              <tr style="background-color: #f1b16d; height: 33px;">
+                <td colspan="12"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </ng-template>
+  
+      
 
   <button class="btn btn-primary text-white m-2" (click)="onTableDataChangePrev()" *ngIf="pageNumber>0">Prev</button>
   <button class="btn btn-primary text-white m-2" (click)="onTableDataChangeNext()" *ngIf="pageNumber<data.totalPages-1">Next</button>
   
-
+  <a routerLink="/disbursement/transactions"><button class="btn btn-primary text-white m-2" data-toggle="tooltip" data-placement="top" title="To Transaction"> Back </button></a>
   </div>
+  
     </div>
   </div>
 </div>

@@ -51,6 +51,8 @@ export class DetailComponent implements OnInit {
 
   })
 
+  date:Date=new Date();
+  
   getDisbursementData(){
     this.route.params.subscribe((params) => {
       if (params && params['id']) {

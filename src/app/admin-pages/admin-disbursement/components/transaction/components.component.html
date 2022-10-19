@@ -49,7 +49,7 @@
           <td> IDR {{data.nominalLoan}}</td>
           <td class="actions">
             <div class="d-flex justify-content-center">
-              <div *ngIf="data.trxStatus==='APPROVED'; else not_disbursed">
+              <div *ngIf="data.trxStatus==='APPROVED' && isStaff; else not_disbursed">
                 <button type="button" class="btn btn-primary text-white me-2" (click)="moveToForm(data)">
                   Disburse
                 </button>
