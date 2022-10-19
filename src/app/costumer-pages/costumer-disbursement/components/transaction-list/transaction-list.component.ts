@@ -43,6 +43,16 @@ export class TransactionListComponent implements OnInit {
     });
     
   }
+
+  sortBy:string='nominalCredit'
+  direction:string='ASC'
+  setSort(sort:string,dir:string){
+    this.sortBy=sort;
+    this.direction=dir;
+    console.log(this.sortBy);
+    console.log(this.direction);
+  }
+
   statusClass(disbursementStatus: string): string {
     if (disbursementStatus=== 'Disbursed') return 'disbursed';
     if (disbursementStatus === 'Failed') return 'failed';
@@ -67,7 +77,7 @@ setInstallment(event:any){
 page:number=0;
 size:number=5;
   getTransactions(){
-  this.transactionService.getAllTransactions(this.installment,this.nik,this.page,this.size).subscribe({
+  this.transactionService.getAllTransactions(this.installment,this.nik,this.page,this.size, this.direction, this.sortBy).subscribe({
       next: ({data})=>{
         this.data=data
         this.totalPages = data.totalPages

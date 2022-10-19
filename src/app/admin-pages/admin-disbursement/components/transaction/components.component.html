@@ -1,6 +1,6 @@
 <h1 class="px-5 py-4 m-0 fw-bold">{{ pageTitle }}</h1>
-<div class="transaction-list-container mx-3">
-  <div class="container px-5">
+<div class="transaction-list-container ">
+  <div class="container">
     <div class="card">
       <div class="card-header bg-white p-4">
     <h2>Loan Transaction List</h2>
@@ -23,16 +23,40 @@
     </div>
   
       <div class="table-responsive-md mx-3 bdr">
-      <table class="table table-bordered" style="border-color: #f79323;">
+      <table class="table table-bordered" style="border-color: #f79323;" >
         <thead>
         <tr>
           <th>No</th>
-          <th>Customer Name</th>
+          <th (click)="setSort('fullName','DESC')">  
+            Customer Name
+
+            <i *ngIf="direction==='DESC' || sortBy!=='fullName'" class="fa fa-arrow-down"></i>
+            <i *ngIf="direction==='ASC' && sortBy==='fullName'" class="fa fa-arrow-up"></i>
+          </th>
           <th>Tenor</th>
-          <th>Transaction Date</th>
-          <th>Disbursement Status</th>
-          <th>Disbursement Date</th>
-          <th>Nominal Loan</th>
+          <th (click)="setSort('trxDate','DESC')">
+            Transaction Date
+            <i *ngIf="direction==='DESC' || sortBy!=='trxDate'" class="fa fa-arrow-down"></i>
+            <i *ngIf="direction==='ASC' && sortBy==='trxDate'" class="fa fa-arrow-up"></i>
+          </th>
+          <th (click)="setSort('trxStatus','DESC')">
+    
+            Transaction Status
+            <i *ngIf="direction==='DESC' || sortBy!=='trxStatus'" class="fa fa-arrow-down"></i>
+            <i *ngIf="direction==='ASC' && sortBy==='trxStatus'" class="fa fa-arrow-up"></i>
+          </th>
+          <th (click)="setSort('disbursementDate','DESC')">
+       
+            Disbursement Date
+            <i *ngIf="direction==='DESC' || sortBy!=='disbursementDate'" class="fa fa-arrow-down"></i>
+            <i *ngIf="direction==='ASC' && sortBy==='disbursementDate'" class="fa fa-arrow-up"></i>
+          </th>
+          <th (click)="setSort('nominalCredit','DESC')">
+       
+            Nominal Loan
+            <i *ngIf="direction==='DESC' || sortBy!=='nominalCredit'" class="fa fa-arrow-down"></i>
+            <i *ngIf="direction==='ASC' && sortBy==='nominalCredit'" class="fa fa-arrow-up"></i>
+          </th>
           <th>Actions</th>
         </tr>
         </thead>

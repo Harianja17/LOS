@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import Swal from "sweetalert2";
 import { PageResponse } from 'src/app/shared/model/PageResponse';
 import { TransactionResponse } from 'src/app/shared/model/transaction.model';
@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceService } from '../service/service.service';
 import { map, switchMap } from 'rxjs';
 import { AuthService } from 'src/app/auth/service/auth.service';
-
+import {Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-components',
@@ -15,10 +15,9 @@ import { AuthService } from 'src/app/auth/service/auth.service';
 })
 export class ComponentsComponent implements OnInit {
 
+
   pageTitle:string='Disbursement'
   transactions?: TransactionResponse[];
-  currentPaginate: { [key: string]: any } = {page: 1, size: 5};
-  paginate?: Omit<PageResponse<any>, "content">
   isPresent:boolean=true;
   searchText='';
   constructor(private readonly route: ActivatedRoute,
@@ -34,6 +33,8 @@ export class ComponentsComponent implements OnInit {
     this.changeRole()
     
   }
+
+
 
   items = [
     {name: "SIX_MONTHS", type: "type2"},
@@ -53,6 +54,8 @@ setInstallment(event:any){
 
 page:number=0;
 size:number=5;
+direction:string='ASC';
+sortBy:string='nominalCredit'
 data:PageResponse<TransactionResponse>={
   totalPages:0,
   size:0,
@@ -64,8 +67,15 @@ isSearch:boolean=true;
 totalPages:number=0;
 isStaff:boolean=true;
 
+setSort(sort:string,dir:string){
+  this.sortBy=sort;
+  this.direction=dir;
+  console.log(this.sortBy);
+  console.log(this.direction);
+}
+
   getTransactions(){
-    this.transactionService.getAllTransactions(this.installment,this.page,this.size).subscribe({
+    this.transactionService.getAllTransactions(this.installment,this.page,this.size,this.direction,this.sortBy).subscribe({
       next: ({data})=>{
         this.totalPages = data.totalPages
         this.data = data;

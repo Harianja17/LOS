@@ -17,6 +17,7 @@ import { AccountListComponent } from './admin-disbursement/components/account-li
 import { TransactionDetailComponent } from './admin-disbursement/components/transaction-detail/transaction-detail.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { SearchPipe } from './admin-disbursement/search/search.pipe';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { SearchPipe } from './admin-disbursement/search/search.pipe';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatTableModule
   ]
 })
 

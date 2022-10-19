@@ -20,9 +20,8 @@ export class ServiceService {
    disbursementStatus :String ='';
    tenor:String=''
 
-  getAllTransactions(params:any,page:any,size:any):Observable<CommonResponse<PageResponse<TransactionResponse>>>{
-
-    return this.http.get<CommonResponse<PageResponse<TransactionResponse>>>(`/api/transactions/?installment=${params}&page=${page}&size=${size}`)
+  getAllTransactions(params:any,page:any,size:any,direction:any,sortBy:any):Observable<CommonResponse<PageResponse<TransactionResponse>>>{
+    return this.http.get<CommonResponse<PageResponse<TransactionResponse>>>(`/api/transactions/?installment=${params}&page=${page}&size=${size}&${direction}&sortBy=${sortBy}`)
   }
   notify(): Observable<void> {
     return this.transactionSubject.asObservable()

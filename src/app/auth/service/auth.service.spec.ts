@@ -1,5 +1,7 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, TestRequest } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { CommonResponse } from 'src/app/shared/model/CommonResponse';
+import { AuthRequest, LoginResponse } from '../model/IAuth';
 
 import { AuthService } from './auth.service';
 
@@ -16,4 +18,5 @@ describe('AuthService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
 });

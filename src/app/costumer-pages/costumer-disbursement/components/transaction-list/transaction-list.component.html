@@ -20,9 +20,22 @@
         <tr>
           <th>No</th>
           <th>Tenor</th>
-          <th>Transaction Date</th>
-          <th>Transaction Status</th>
-          <th>Nominal Loan</th>
+          <th (click)="setSort('trxDate','DESC')">
+            Transaction Date
+            <i *ngIf="direction==='DESC' || sortBy!=='trxDate'" class="fa fa-arrow-down"></i>
+            <i *ngIf="direction==='ASC' && sortBy==='trxDate'" class="fa fa-arrow-up"></i>
+          </th>
+          <th (click)="setSort('trxStatus','DESC')">
+    
+            Transaction Status
+            <i *ngIf="direction==='DESC' || sortBy!=='trxStatus'" class="fa fa-arrow-down"></i>
+            <i *ngIf="direction==='ASC' && sortBy==='trxStatus'" class="fa fa-arrow-up"></i>
+          </th>
+          <th (click)="setSort('nominalCredit','DESC')">
+            Nominal Loan
+            <i *ngIf="direction==='DESC' || sortBy!=='nominalCredit'" class="fa fa-arrow-down"></i>
+            <i *ngIf="direction==='ASC' && sortBy==='nominalCredit'" class="fa fa-arrow-up"></i>
+          </th>
           <th>Action</th>
         </tr>
         </thead>
