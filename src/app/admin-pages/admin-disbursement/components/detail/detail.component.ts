@@ -47,7 +47,11 @@ export class DetailComponent implements OnInit {
     disbursementId:new FormControl(''),
     customerBank: new FormControl(null, Validators.required),
     customerAccountName: new FormControl(null, Validators.required),
-    customerAccountNumber: new FormControl(null, Validators.required)
+    customerAccountNumber: new FormControl(null, [
+      Validators.required,
+      Validators.pattern("^[0-9]*$"),
+      Validators.minLength(8),
+    ])
 
   })
 
