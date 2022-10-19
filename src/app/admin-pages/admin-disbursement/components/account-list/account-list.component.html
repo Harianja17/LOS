@@ -60,7 +60,17 @@
               <td colspan="12"></td>
             </tr>
           </tfoot>
+          
         </table>
+        <div class="d-flex justify-content-between">
+          <div class="pagination">
+            <button class="btn btn-primary text-white me-2 " (click)="onTableDataChangePrev()" *ngIf="pageNumber>0">Prev</button>
+            <button class="btn btn-primary text-white " (click)="onTableDataChangeNext()" *ngIf="pageNumber<data.totalPages-1">Next</button>
+          </div>
+          <div class="back">
+            <a routerLink="/disbursement/transactions"><button type="button" class="btn btn-secondary text-white ml-2 float-right" data-toggle="tooltip" data-placement="top" title="To Transaction"> Back </button></a>
+          </div>
+      </div>
       </div>
     </div>
       <ng-template #not_staff>

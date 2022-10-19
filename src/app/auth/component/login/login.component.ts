@@ -29,16 +29,11 @@ export class LoginComponent implements OnInit {
 
   login(){
       if(this.loginForm.valid){
-      console.log(this.loginForm.value);
       let data : any = {nik:this.loginForm.value['nik'],
                           password:this.loginForm.value['password']}
-
-      console.log(data);
-      
       this.service.login(data).subscribe({
         next : (res : any) => 
         {
-          console.log(res)
           let dataSent = {nik:res.data.nik, role:res.data.role, token:res.data.token}
           this.service.storeUser(dataSent) 
           

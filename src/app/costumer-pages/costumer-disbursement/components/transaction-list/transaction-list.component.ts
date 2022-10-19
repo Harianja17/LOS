@@ -39,7 +39,6 @@ export class TransactionListComponent implements OnInit {
     this.authService.getUserFromToken()
     .subscribe(data => {
       this.nik=data.data.nik
-      console.log(this.nik);
       this.getTransactions();
     });
     
@@ -68,23 +67,7 @@ setInstallment(event:any){
 page:number=0;
 size:number=5;
   getTransactions(){
-    this.route.queryParamMap.pipe(
-      switchMap((val)=>{
-        console.log(this.nik);
-        
-        return this.transactionService.getAllTransactions(this.installment,this.nik,this.page,this.size).pipe(map(({data})=>{
-         console.log(data);
-         
-          
-          if(Object.getOwnPropertyNames(val).length!==0){
-            return {params:val, data:data};
-          }else{
-            this.isPresent=false;
-            return {params:{page: 1, size: 5, direction: 'Desc'}, data:data};
-          }
-        }))
-      })
-    ).subscribe({
+  this.transactionService.getAllTransactions(this.installment,this.nik,this.page,this.size).subscribe({
       next: ({data})=>{
         this.data=data
         this.totalPages = data.totalPages

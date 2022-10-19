@@ -24,5 +24,5 @@ export interface AuthRequest {
     SUPERVISOR='ROLE_SUPERVISOR',
     STAFF='ROLE_STAFF',
     CUSTOMER='ROLE_CUSTOMER',
-    ADMIN = 'ROLE_ADMIN' // Testing Purpose Only, Using the Spring Loan JAR as the Backend
+    ADMIN = 'ROLE_ADMIN' 
   }

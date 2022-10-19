@@ -45,7 +45,6 @@ export class ServiceService {
   }
 
   addDisbursement(disburse: DisbursementResponseDTO): Observable<CommonResponse<DisbursementResponseDTO>> {
-    console.log('CREATE');
     return this.http.post<CommonResponse<DisbursementResponseDTO>>('api/disbursements', disburse)
     
   }
@@ -56,7 +55,6 @@ export class ServiceService {
   }
 
   deleteDisbursement(disburse: DisbursementResponseDTO): Observable<CommonResponse<Disbursement>> {
-    console.log('disbursement id: '+ disburse.disbursementId);
     return this.http.put<CommonResponse<Disbursement>>('api/disbursements/'+ disburse.disbursementId, disburse)
   }
 
