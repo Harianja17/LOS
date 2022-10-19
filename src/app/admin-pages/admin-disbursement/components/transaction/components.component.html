@@ -49,8 +49,8 @@
           <td> IDR {{data.nominalLoan}}</td>
           <td class="actions">
             <div class="d-flex justify-content-center">
-              <div *ngIf="data.trxStatus==='APPROVED' && isStaff; else not_disbursed">
-                <button type="button" class="btn btn-primary text-white me-2" (click)="moveToForm(data)">
+              <div *ngIf="isStaff; else not_disbursed">
+                <button type="button" class="btn btn-primary text-white me-2" [disabled]="data.trxStatus==='DISBURSED'"  (click)="moveToForm(data)">
                   Disburse
                 </button>
                 <button type="button" class="btn btn-secondary text-white me-2" (click)="moveToDetails(data)">
@@ -73,10 +73,19 @@
           </tr>
         </tfoot>
       </table>
-      <button class="btn btn-primary text-white me-2" (click)="onTableDataChangePrev()" *ngIf="page>0">Prev</button>
-    <button class="btn btn-primary text-white me-2" (click)="onTableDataChangeNext()" *ngIf="page<data.totalPages-1">Next</button>
+      <div class="d-flex justify-content-between">
+        <div class="pagination">
+          <button class="btn btn-primary text-white me-2" (click)="onTableDataChangePrev()" *ngIf="page>0">Prev</button>
+          <button class="btn btn-primary text-white me-2" (click)="onTableDataChangeNext()" *ngIf="page<data.totalPages-1">Next</button>
+      
+        </div>
+        <div class="back">
+          <a routerLink="/disbursement/account-list"><button class="btn btn-secondary text-white " > Account List</button></a> 
+        </div>
 
-    <a routerLink="/disbursement/account-list"><button class="btn btn-secondary text-white " > Account List</button></a> 
+      </div>
+      
+
     </div>
   </div>
  
