@@ -52,28 +52,16 @@
     >
     <a class="btn text-start px-3 mx-4 my-2" (click)="approvalRoute()"
       ><img class="me-2" src="/assets/iconify/manager-list.svg" />Approval</a
-    >  >
+    >  
     <a
-            class="btn text-start px-3 mx-4 my-2"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseDisbursement"
-          >
-            <i class="fa fa-hand-holding-dollar fa-lg me-2"></i>
-            Disbursement
-            <i class="ms-2 fa-solid fa-chevron-down"></i>
-          </a>
-          <div class="collapse" id="collapseDisbursement">
-            <div class="ms-3">
-              <a
                 class="btn text-start px-3 mx-4 my-2 collapse "
                 (click)="disbursementRoute()"
                 routerLinkActive="btn-primary text-white"
               >
-                <i class="fa fa-database fa-lg me-2"></i>
-                Transaction
-              </a>
-            </div>
-          </div>
+            <i class="fa fa-hand-holding-dollar fa-lg me-2"></i>
+            Disbursement
+    
+          </a>
   </div>
   <a class="btn btn-primary text-white px-3 mx-4 my-2" (click)="logOut()">Logout</a>
 </div>
