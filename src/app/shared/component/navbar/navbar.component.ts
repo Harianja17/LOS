@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
 
   nikForView : string = ""
   roleForView : string  = ""
+  nameForView:string=""
   roleAdminCheck : Boolean = false
 
   ngOnInit(): void {
