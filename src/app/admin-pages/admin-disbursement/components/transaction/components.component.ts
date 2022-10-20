@@ -7,6 +7,7 @@ import { ServiceService } from '../service/service.service';
 import { map, switchMap } from 'rxjs';
 import { AuthService } from 'src/app/auth/service/auth.service';
 import {Sort} from '@angular/material/sort';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-components',
@@ -67,11 +68,17 @@ isSearch:boolean=true;
 totalPages:number=0;
 isStaff:boolean=true;
 
-setSort(sort:string,dir:string){
+setSort(sort:string){
   this.sortBy=sort;
-  this.direction=dir;
-  console.log(this.sortBy);
-  console.log(this.direction);
+  if(this.direction==='ASC'){
+    this.direction='DESC'
+   
+  }
+  else{
+    this.direction='ASC'
+   
+  }
+  this.getTransactions()
 }
 
   getTransactions(){

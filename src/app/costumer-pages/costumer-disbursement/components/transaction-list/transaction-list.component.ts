@@ -46,12 +46,6 @@ export class TransactionListComponent implements OnInit {
 
   sortBy:string='nominalCredit'
   direction:string='ASC'
-  setSort(sort:string,dir:string){
-    this.sortBy=sort;
-    this.direction=dir;
-    console.log(this.sortBy);
-    console.log(this.direction);
-  }
 
   statusClass(disbursementStatus: string): string {
     if (disbursementStatus=== 'Disbursed') return 'disbursed';
@@ -105,6 +99,19 @@ size:number=5;
   onTableDataChangePrev(){
     this.page-=1;
     this.getTransactions();
+  }
+
+  setSort(sort:string){
+    this.sortBy=sort;
+    if(this.direction==='ASC'){
+      this.direction='DESC'
+     
+    }
+    else{
+      this.direction='ASC'
+     
+    }
+    this.getTransactions()
   }
 
 }

@@ -42,7 +42,7 @@ export class AccountListComponent implements OnInit {
   ]
   
   loadAccounts(){
-   this.service.getDisbursements(this.selectedOption,this.pageNumber).subscribe({
+   this.service.getDisbursements(this.selectedOption,this.pageNumber,this.sortBy,this.direction).subscribe({
       next: ({data})=>{
         this.totalPages = data.totalPages
         this.data = data;
@@ -112,6 +112,21 @@ export class AccountListComponent implements OnInit {
     this.loadAccounts();
   }
   searchText='';
+
+  sortBy:string='disbursementDate'
+  direction:string='ASC'
+  setSort(sort:string){
+    this.sortBy=sort;
+    if(this.direction==='ASC'){
+      this.direction='DESC'
+     
+    }
+    else{
+      this.direction='ASC'
+     
+    }
+    this.loadAccounts()
+  }
 
 
 }

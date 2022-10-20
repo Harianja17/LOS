@@ -28,9 +28,21 @@
           <thead>
           <tr>
             <th>No</th>
-            <th>Bank</th>
-            <th>Account Name</th>
-            <th>Account Number</th>
+            <th (click)="setSort('customerBank')">
+              Bank
+              <i *ngIf="direction==='DESC' || sortBy!=='customerBank'" class="fa fa-arrow-down"></i>
+              <i *ngIf="direction==='ASC' && sortBy==='customerBank'" class="fa fa-arrow-up"></i>
+            </th>
+            <th (click)="setSort('customerAccountName')">
+              Account Name
+              <i *ngIf="direction==='DESC' || sortBy!=='customerAccountName'" class="fa fa-arrow-down"></i>
+              <i *ngIf="direction==='ASC' && sortBy==='customerAccountName'" class="fa fa-arrow-up"></i>
+            </th>
+            <th (click)="setSort('customerAccountNumber')">
+              Account Number
+              <i *ngIf="direction==='DESC' || sortBy!=='customerAccountNumber'" class="fa fa-arrow-down"></i>
+              <i *ngIf="direction==='ASC' && sortBy==='customerAccountNumber'" class="fa fa-arrow-up"></i>
+            </th>
             <th>Actions</th>
           </tr>
           </thead>

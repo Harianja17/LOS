@@ -21,7 +21,7 @@ export class ServiceService {
    tenor:String=''
 
   getAllTransactions(params:any,page:any,size:any,direction:any,sortBy:any):Observable<CommonResponse<PageResponse<TransactionResponse>>>{
-    return this.http.get<CommonResponse<PageResponse<TransactionResponse>>>(`/api/transactions/?installment=${params}&page=${page}&size=${size}&${direction}&sortBy=${sortBy}`)
+    return this.http.get<CommonResponse<PageResponse<TransactionResponse>>>(`/api/transactions/?installment=${params}&page=${page}&size=${size}&direction=${direction}&sortBy=${sortBy}`)
   }
   notify(): Observable<void> {
     return this.transactionSubject.asObservable()
@@ -35,8 +35,8 @@ export class ServiceService {
   }
 
 
-  public getDisbursements(option:String,page:number): Observable<CommonResponse<PageResponse<DisbursementResponseDTO>>>{
-    return this.http.get<CommonResponse<PageResponse<DisbursementResponseDTO>>>('/api/disbursements?size='+option+'&page='+page.toString());
+  public getDisbursements(option:String,page:number,sort:string,direction:string): Observable<CommonResponse<PageResponse<DisbursementResponseDTO>>>{
+    return this.http.get<CommonResponse<PageResponse<DisbursementResponseDTO>>>('/api/disbursements?size='+option+'&page='+page.toString()+'&sortBy='+sort+'&direction='+direction);
   }
   
   getDisbursementById(id: string): Observable<CommonResponse<Disbursement>>{
