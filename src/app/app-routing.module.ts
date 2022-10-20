@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/component/login/login.component';
+import { NotFoundComponent } from './shared/component/not-found/not-found.component';
 import { AdminGuard } from './shared/guard/admin.guard';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { CustomerGuard } from './shared/guard/customer.guard';
@@ -20,6 +21,10 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth-routing.module').then(m => m.AuthRoutingModule),
     canActivate: [LoginGuard],
   },
+  {
+    path:'**',
+    component:NotFoundComponent
+  }
 ];
 
 @NgModule({
