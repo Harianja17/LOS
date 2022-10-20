@@ -72,11 +72,9 @@ setSort(sort:string){
   this.sortBy=sort;
   if(this.direction==='ASC'){
     this.direction='DESC'
-   
   }
   else{
     this.direction='ASC'
-   
   }
   this.getTransactions()
 }

@@ -34,14 +34,9 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   authorize(): Observable<boolean> {
     const user: LoginResponse | null = this.service.getUserFromStorage();
-
-    console.log('auth guard result: ',user);
-    
-
     if (user && user.token) {
       return this.service.getUserFromToken().pipe(map(({data}) => {
           if (data) {
-            console.log('AUTH GUARD PASSED');
             return true;}
           else{
           this.router.navigateByUrl('/login').then();

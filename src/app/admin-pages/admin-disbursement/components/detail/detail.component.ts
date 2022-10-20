@@ -76,14 +76,13 @@ export class DetailComponent implements OnInit {
 
   addUpdateDisbursement(disbursement: Disbursement) {
 
-this.disbursementData.customerAccountName = this.disbursementForm.value.customerAccountName;
-this.disbursementData.customerAccountNumber = this.disbursementForm.value.customerAccountNumber;
-this.disbursementData.customerBank = this.disbursementForm.value.customerBank;
+    this.disbursementData.customerAccountName = this.disbursementForm.value.customerAccountName;
+    this.disbursementData.customerAccountNumber = this.disbursementForm.value.customerAccountNumber;
+    this.disbursementData.customerBank = this.disbursementForm.value.customerBank;
 
-this.disbursementData2.customerAccountName = this.disbursementForm.value.customerAccountName;
-this.disbursementData2.customerAccountNumber = this.disbursementForm.value.customerAccountNumber;
-this.disbursementData2.customerBank = this.disbursementForm.value.customerBank;
-console.log('method');
+    this.disbursementData2.customerAccountName = this.disbursementForm.value.customerAccountName;
+    this.disbursementData2.customerAccountNumber = this.disbursementForm.value.customerAccountNumber;
+    this.disbursementData2.customerBank = this.disbursementForm.value.customerBank;
     this.route.params.subscribe((params) => {
       if (true) {
         
@@ -127,12 +126,6 @@ console.log('method');
     this.disbursementForm.controls['customerBank'].setValue(data.customerBank)
     this.disbursementForm.controls['customerAccountName'].setValue(data.customerAccountName)
     this.disbursementForm.controls['customerAccountNumber'].setValue(data.customerAccountNumber)
-  }
-
-
-  getDetail(){
-    console.log(this.disbursementData);
-    
   }
   form(property:string):FormGroup{
     return this.disbursementForm.get(property) as FormGroup;
